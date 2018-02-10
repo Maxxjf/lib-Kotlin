@@ -1,7 +1,7 @@
 package com.qcloud.qclib.materialdesign.enums
 
 /**
- * 类说明：
+ * 类说明：三个按钮的显示位置
  * Author: Kuzan
  * Date: 2018/2/8 17:50.
  */

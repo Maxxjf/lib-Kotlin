@@ -75,9 +75,9 @@ open class DefaultRvAdapter(
             }
         }
 
-        holder.title.text = dialog.builder.items!![index]
-        holder.title.setTextColor(itemTextColor)
-        dialog.setTypeface(holder.title, dialog.builder.regularFont)
+        holder.title?.text = dialog.builder.items!![index]
+        holder.title?.setTextColor(itemTextColor)
+        dialog.setTypeface(holder.title!!, dialog.builder.regularFont)
 
         setupGravity(view as ViewGroup)
 
@@ -161,12 +161,13 @@ open class DefaultRvAdapter(
         fun onItemSelected(dialog: MaterialDialog, itemView: View, position: Int, text: CharSequence?, longPress: Boolean): Boolean
     }
 
-     class DefaultVH(itemView: View, val adapter: DefaultRvAdapter) : RecyclerView.ViewHolder(itemView), View.OnClickListener, View.OnLongClickListener {
-
-        val control: CompoundButton = itemView.findViewById(R.id.md_control)
-        val title: TextView = itemView.findViewById(R.id.md_title)
+    class DefaultVH(itemView: View, val adapter: DefaultRvAdapter) : RecyclerView.ViewHolder(itemView), View.OnClickListener, View.OnLongClickListener {
+        var control: CompoundButton? = null
+        var title: TextView? = null
 
         init {
+            control = itemView.findViewById(R.id.md_control)
+            title =  itemView.findViewById(R.id.md_title)
             itemView.setOnClickListener(this)
             if (adapter.dialog.builder.listLongCallback != null) {
                 itemView.setOnLongClickListener(this)

@@ -5,63 +5,63 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-  <include layout="@layout/md_stub_titleframe_lesspadding"/>
+    <include layout="@layout/md_stub_titleframe_lesspadding"/>
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="vertical">
-
-    <ScrollView
-        android:id="@+id/md_contentScrollView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-      <TextView
-          android:id="@+id/md_content"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:paddingBottom="@dimen/padding_4"
-          android:paddingLeft="@dimen/padding_12"
-          android:paddingRight="@dimen/padding_12"
-          android:paddingTop="@dimen/padding_4"
-          android:textSize="@dimen/medium_text_size"
-          tools:text="Content"/>
+        <ScrollView
+            android:id="@+id/md_contentScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false">
 
-    </ScrollView>
+            <TextView
+                android:id="@+id/md_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/padding_4"
+                android:paddingLeft="@dimen/padding_12"
+                android:paddingRight="@dimen/padding_12"
+                android:paddingTop="@dimen/padding_4"
+                android:textSize="@dimen/medium_text_size"
+                tools:text="Content"/>
 
-    <FrameLayout
-        android:id="@+id/md_contentListViewFrame"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        </ScrollView>
 
-      <android.support.v7.widget.RecyclerView
-          android:id="@+id/md_contentRecyclerView"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:clipToPadding="false"
-          android:paddingBottom="@dimen/padding_4"
-          android:paddingTop="@dimen/padding_4"
-          android:scrollbarStyle="outsideOverlay"
-          android:scrollbars="vertical"/>
+        <FrameLayout
+            android:id="@+id/md_contentListViewFrame"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-    </FrameLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/md_contentRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/padding_4"
+                android:paddingTop="@dimen/padding_4"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="vertical"/>
 
-    <CheckBox
-        android:id="@+id/md_promptCheckbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="@dimen/padding_8"
-        android:layout_marginRight="@dimen/padding_8"
-        android:focusable="true"
-        android:gravity="start|center_vertical"
-        tools:text="Don't ask again"/>
+        </FrameLayout>
 
-  </LinearLayout>
+        <CheckBox
+            android:id="@+id/md_promptCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginLeft="@dimen/padding_8"
+            android:layout_marginRight="@dimen/padding_8"
+            android:focusable="true"
+            android:gravity="start|center_vertical"
+            tools:text="Don't ask again"/>
 
-  <include layout="@layout/md_stub_actionbuttons"/>
+    </LinearLayout>
+
+    <include layout="@layout/md_stub_actionbuttons"/>
 
 </com.qcloud.qclib.materialdesign.widget.MDRootLayout>

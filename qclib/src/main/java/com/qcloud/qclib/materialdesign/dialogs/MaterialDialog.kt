@@ -972,7 +972,9 @@ class MaterialDialog constructor(val builder: Builder): BaseDialog(builder.mCont
 
         // CheckBox有关
         var checkBoxPrompt: CharSequence? = null
+        // 是否默认选中
         var checkBoxPromptInitiallyChecked: Boolean = false
+        // 选中监听
         var checkBoxPromptListener: CompoundButton.OnCheckedChangeListener? = null
         var inputFilters: Array<InputFilter>? = null
 
@@ -1370,6 +1372,8 @@ class MaterialDialog constructor(val builder: Builder): BaseDialog(builder.mCont
 
         /**
          * 单选
+         *
+         * @param selectedIndex 默认选中哪一项
          */
         fun itemsCallbackSingleChoice(selectedIndex: Int, callback: ListCallbackSingleChoice): Builder {
             this.selectedIndex = selectedIndex
@@ -1389,6 +1393,8 @@ class MaterialDialog constructor(val builder: Builder): BaseDialog(builder.mCont
 
         /**
          * 多选
+         *
+         * @param selectedIndices 初始选中的索引
          */
         fun itemsCallbackMultiChoice(selectedIndices: Array<Int>?, callback: ListCallbackMultiChoice): Builder {
             this.selectedIndices = selectedIndices
@@ -1399,7 +1405,7 @@ class MaterialDialog constructor(val builder: Builder): BaseDialog(builder.mCont
         }
 
         /**
-         * 未选中索引
+         * 不允许选中索引
          */
         fun itemsDisabledIndices(disabledIndices: Array<Int>): Builder {
             this.disabledIndices = disabledIndices
@@ -1783,10 +1789,10 @@ class MaterialDialog constructor(val builder: Builder): BaseDialog(builder.mCont
          */
         fun adapter(adapter: RecyclerView.Adapter<*>, layoutManager: RecyclerView.LayoutManager?): Builder {
             if (this.customView != null) {
-                throw IllegalStateException("You cannot set adapter() when " + "you're using a custom view.")
+                throw IllegalStateException("You cannot set adapter() when you're using a custom view.")
             }
             if (layoutManager != null && layoutManager !is LinearLayoutManager && layoutManager !is GridLayoutManager) {
-                throw IllegalStateException("You can currently only use LinearLayoutManager" + " and GridLayoutManager with this library.")
+                throw IllegalStateException("You can currently only use LinearLayoutManager and GridLayoutManager with this library.")
             }
             this.adapter = adapter
             this.layoutManager = layoutManager

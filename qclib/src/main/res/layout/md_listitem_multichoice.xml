@@ -1,40 +1,40 @@
 <LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:background="?selectableItemBackground"
-  android:descendantFocusability="blocksDescendants"
-  android:focusable="true"
-  android:minHeight="@dimen/tab_height"
-  android:orientation="horizontal"
-  android:paddingEnd="@dimen/padding_12"
-  android:paddingLeft="@dimen/padding_12"
-  android:paddingRight="@dimen/padding_12"
-  android:paddingStart="@dimen/padding_12"
-  tools:gravity="start|center_vertical">
-
-  <android.support.v7.widget.AppCompatCheckBox
-    android:id="@+id/md_control"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:background="@null"
-    android:clickable="false"
-    android:focusable="false"
-    android:gravity="center_vertical"/>
-
-  <TextView
-    android:id="@+id/md_title"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:gravity="center_vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    android:descendantFocusability="blocksDescendants"
+    android:focusable="true"
     android:minHeight="@dimen/tab_height"
-    android:paddingBottom="@dimen/padding_4"
-    android:paddingLeft="@dimen/padding_3"
-    android:paddingStart="@dimen/padding_3"
-    android:paddingTop="@dimen/padding_4"
-    android:textSize="@dimen/medium_text_size"
-    tools:ignore="NewApi,RtlSymmetry"
-    tools:text="Item"/>
+    android:orientation="horizontal"
+    android:paddingEnd="@dimen/padding_12"
+    android:paddingLeft="@dimen/padding_12"
+    android:paddingRight="@dimen/padding_12"
+    android:paddingStart="@dimen/padding_12"
+    tools:gravity="start|center_vertical">
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/md_control"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:clickable="false"
+        android:focusable="false"
+        android:gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/md_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/tab_height"
+        android:paddingBottom="@dimen/padding_4"
+        android:paddingLeft="@dimen/padding_3"
+        android:paddingStart="@dimen/padding_3"
+        android:paddingTop="@dimen/padding_4"
+        android:textSize="@dimen/medium_text_size"
+        tools:ignore="NewApi,RtlSymmetry"
+        tools:text="Item"/>
 
 </LinearLayout>
