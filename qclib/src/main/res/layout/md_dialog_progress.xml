@@ -1,0 +1,27 @@
+<com.qcloud.qclib.materialdesign.widget.MDRootLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  app:md_reduce_padding_no_title_no_buttons="false">
+
+  <include layout="@layout/md_stub_titleframe"/>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/padding_4"
+    android:paddingLeft="@dimen/padding_12"
+    android:paddingRight="@dimen/padding_12"
+    android:paddingTop="@dimen/padding_4">
+
+    <include layout="@layout/md_stub_progress"/>
+
+  </LinearLayout>
+
+  <include layout="@layout/md_stub_actionbuttons"/>
+
+</com.qcloud.qclib.materialdesign.widget.MDRootLayout>

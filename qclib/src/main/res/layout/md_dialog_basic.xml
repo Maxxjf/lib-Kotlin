@@ -1,0 +1,33 @@
+<com.qcloud.qclib.materialdesign.widget.MDRootLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  app:md_reduce_padding_no_title_no_buttons="false">
+
+  <include layout="@layout/md_stub_titleframe"/>
+
+  <ScrollView
+    android:id="@+id/md_contentScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:paddingBottom="@dimen/padding_4"
+    android:paddingTop="@dimen/padding_4">
+
+    <TextView
+      android:id="@+id/md_content"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingLeft="@dimen/padding_12"
+      android:paddingRight="@dimen/padding_12"
+      android:textSize="@dimen/medium_text_size"
+      tools:text="Content"/>
+
+  </ScrollView>
+
+  <include layout="@layout/md_stub_actionbuttons"/>
+
+</com.qcloud.qclib.materialdesign.widget.MDRootLayout>

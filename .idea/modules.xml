@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://D:\AndroidGit\qcloudLib-android\QcloudLib.iml" filepath="D:\AndroidGit\qcloudLib-android\QcloudLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qclib/qclib.iml" filepath="$PROJECT_DIR$/qclib/qclib.iml" />
+      <module fileurl="file://D:\AndroidGit\qcloudLib-android\.idea\qcloudLib-android.iml" filepath="D:\AndroidGit\qcloudLib-android\.idea\qcloudLib-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qcloudLib-kotlin.iml" filepath="$PROJECT_DIR$/qcloudLib-kotlin.iml" />
+    </modules>
+  </component>
+</project>
