@@ -1,7 +1,7 @@
 package com.qcloud.qclib.materialdesign.enums
 
 /**
- * 类说明：
+ * 类说明：弹窗按钮
  * Author: Kuzan
  * Date: 2018/2/9 11:51.
  */

@@ -19,7 +19,7 @@ import com.qcloud.qclib.materialdesign.enums.StackingBehavior
 import com.qcloud.qclib.utils.DialogUtil
 
 /**
- * 类说明：
+ * 类说明：基于Material Design 弹窗的布局容器，所有弹窗列表的布局要以此为根布局
  * Author: Kuzan
  * Date: 2018/2/8 17:41.
  */

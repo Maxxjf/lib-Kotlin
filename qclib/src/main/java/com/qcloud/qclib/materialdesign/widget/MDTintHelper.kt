@@ -16,7 +16,7 @@ import com.qcloud.qclib.R
 import com.qcloud.qclib.utils.DialogUtil
 
 /**
- * 类说明：
+ * 类说明：着色器
  * Author: Kuzan
  * Date: 2018/2/9 10:52.
  */

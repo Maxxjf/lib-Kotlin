@@ -24,6 +24,11 @@ import android.support.v4.util.SimpleArrayMap
         zip:/data/app/com.your.packagenage-1.apk:/assets/Roboto-Medium.ttf: 125K
 
 */
+/**
+ * 类说明：字体格式
+ * Author: Kuzan
+ * Date: 2018/2/9 16:49.
+ */
 object TypefaceHelper {
 
     private val cache = SimpleArrayMap<String, Typeface>()

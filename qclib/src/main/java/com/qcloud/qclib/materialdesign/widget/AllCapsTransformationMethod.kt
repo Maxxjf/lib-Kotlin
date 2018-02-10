@@ -6,7 +6,7 @@ import android.text.method.TransformationMethod
 import android.view.View
 
 /**
- * 类说明：
+ * 类说明：文字字母转大写实现
  * Author: Kuzan
  * Date: 2018/2/8 17:33.
  */

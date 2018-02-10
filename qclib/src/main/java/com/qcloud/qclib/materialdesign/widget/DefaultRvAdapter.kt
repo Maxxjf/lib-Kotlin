@@ -18,7 +18,7 @@ import com.qcloud.qclib.materialdesign.enums.ListType
 import com.qcloud.qclib.utils.DialogUtil
 
 /**
- * 类说明：
+ * 类说明：弹窗列表适配器，要是自定义弹窗列表适配器，要基于DefaultRvAdapter
  * Author: Kuzan
  * Date: 2018/2/9 13:52.
  */

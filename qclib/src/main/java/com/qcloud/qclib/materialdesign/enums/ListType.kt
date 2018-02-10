@@ -3,7 +3,7 @@ package com.qcloud.qclib.materialdesign.enums
 import com.qcloud.qclib.R
 
 /**
- * 类说明：
+ * 类说明：列表类型
  * Author: Kuzan
  * Date: 2018/2/9 17:13.
  */
