@@ -3,6 +3,7 @@ package com.qcloud.qclib.pullrefresh
 import android.content.Context
 import android.support.annotation.IntRange
 import android.support.annotation.NonNull
+import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.util.Log
 import android.view.Gravity
@@ -354,6 +355,15 @@ open class PullRefreshView @JvmOverloads constructor(
                 isPullUp = false
                 if (onFooterStateListener != null && isMore) {
                     onFooterStateListener?.onRetractFoot(mFoot)
+                }
+
+                val count = childCount
+
+                if (count > 2) {
+                    val content = getChildAt(2)
+                    if (content is RecyclerView) {
+                        content.scrollBy(0, FOOT_DEFAULT_HEIGHT)
+                    }
                 }
             } else if (isPullDown) {
                 isPullDown = false

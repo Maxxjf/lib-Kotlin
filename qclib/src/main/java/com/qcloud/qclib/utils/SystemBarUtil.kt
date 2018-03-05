@@ -421,6 +421,12 @@ object SystemBarUtil {
             when {
                 OSUtil.isMIUI() -> {
                     setMIUIStatusBarLightMode(activity.window, dark)
+                    // 解决MIUI9以上不改变字体颜色问题
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (dark) {
+                            activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                        }
+                    }
                 }
                 OSUtil.isFlyme() -> {
                     setFlymeStatusBarLightMode(activity.window, dark)
