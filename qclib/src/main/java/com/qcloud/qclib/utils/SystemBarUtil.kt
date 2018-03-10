@@ -89,8 +89,10 @@ object SystemBarUtil {
         statusBarView.setBackgroundColor(ColorUtils.blendARGB(backgroundColor, backgroundColor, 0.0f))
         statusBarView.visibility = View.VISIBLE
 
-        val viewGroup = statusBarView.parent as ViewGroup
-        viewGroup.removeView(statusBarView)
+        val viewGroup = statusBarView.parent
+        if (viewGroup != null) {
+            (viewGroup as ViewGroup).removeView(statusBarView)
+        }
 
         val decorView = activity.window.decorView as ViewGroup
         decorView.addView(statusBarView)
