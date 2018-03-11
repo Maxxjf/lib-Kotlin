@@ -1,12 +1,13 @@
-package com.qcloud.qclib.swiperefresh
+package com.qcloud.qclib.refresh.swiperefresh
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.support.annotation.DrawableRes
+import android.support.annotation.ColorInt
+import android.support.annotation.ColorRes
+import android.support.v4.content.ContextCompat
 import android.view.View
 
-import com.qcloud.qclib.R
+import com.qcloud.qclib.refresh.listener.OnFooterStateListener
+import com.qcloud.qclib.refresh.widget.FooterView
 
 /**
  * 类说明：上拉加载更多工具类，下拉默认开启，若想不开启，使用PullRefreshView
@@ -21,7 +22,7 @@ object SwipeRefreshUtil {
      * @param view          刷新控件
      * @param isLoadMore   是否开启上拉加载
      */
-    fun setLoadMore(view: CustomSwipeLayout, isLoadMore: Boolean) {
+    fun setLoadMore(view: SwipeRefreshLayout, isLoadMore: Boolean = true) {
 
         var footerView: FooterView? = null
 
@@ -40,7 +41,7 @@ object SwipeRefreshUtil {
      * @param footerView        尾部View
      * @param listener          尾部监听器
      */
-    fun setLoadMore(view: CustomSwipeLayout, isLoadMore: Boolean, footerView: View?, listener: OnFooterStateListener?) {
+    fun setLoadMore(view: SwipeRefreshLayout, isLoadMore: Boolean, footerView: View?, listener: OnFooterStateListener?) {
         view.setLoadMore(isLoadMore)
         if (isLoadMore) {
             view.setFooter(footerView!!)
@@ -49,31 +50,39 @@ object SwipeRefreshUtil {
     }
 
     /**
-     * 设置下拉刷新加载动画
-     *
-     * @param view          刷新控件
-     * @param res           刷新动画图片资源
-     * @param animPosition  刷新动画的位置 1左边 2中间
-     */
-    fun setRefreshImage(context: Context, view: CustomSwipeLayout, @DrawableRes res: Int, animPosition: Int) {
-        val drawable = CustomProgressDrawable(context, view)
-        val bitmap: Bitmap = if (res > 0) {
-            BitmapFactory.decodeResource(context.resources, res)
-        } else {
-            BitmapFactory.decodeResource(context.resources, R.drawable.default_refresh_icon)
-        }
-        drawable.setBitmap(bitmap)
-        view.setProgressView(drawable)
-        view.animPosition = animPosition
-    }
-
-    /**
      * 设置下拉刷新动画的位置
      *
      * @param view          刷新控件
      * @param animPosition  刷新动画的位置 1左边 2中间
      */
-    fun setAnimPosition(view: CustomSwipeLayout, animPosition: Int) {
-        view.animPosition = animPosition
+    fun setAnimPosition(view: SwipeRefreshLayout, animPosition: Int) {
+        view.mAnimPosition = animPosition
+    }
+
+    /**
+     * 设置动画颜色
+     *
+     * @param colors 颜色值
+     * */
+    fun setColorScheme(view: SwipeRefreshLayout, @ColorInt vararg colors: Int) {
+        view.setColorScheme(*colors)
+    }
+
+    /**
+     * 设置动画颜色
+     *
+     * @param colorResIds 颜色值
+     * */
+    fun setColorSchemeResources(view: SwipeRefreshLayout, @ColorRes vararg colorResIds: Int) {
+        view.setColorSchemeResources(*colorResIds)
+    }
+
+    /**
+     * 设置动画颜色
+     *
+     * @param colors 颜色值
+     * */
+    fun setColorSchemeColors(view: SwipeRefreshLayout, colors: IntArray) {
+        view.setColorSchemeColors(colors)
     }
 }

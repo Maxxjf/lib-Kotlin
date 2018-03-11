@@ -1,4 +1,4 @@
-package com.qcloud.qclib.swiperefresh
+package com.qcloud.qclib.refresh.swiperefresh
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -19,7 +19,7 @@ import com.qcloud.qclib.R
 class SwipeRecyclerView @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0) : CustomSwipeLayout(context, attrs, defStyleAttr) {
+        defStyleAttr: Int = 0) : SwipeRefreshLayout(context, attrs, defStyleAttr) {
 
     /**内置的RecyclerView*/
     val recyclerView = LayoutInflater.from(context).inflate(R.layout.layout_recycler_view, null, false) as RecyclerView
@@ -74,7 +74,7 @@ class SwipeRecyclerView @JvmOverloads constructor(
             override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (isAutomaticUp && newState == RecyclerView.SCROLL_STATE_IDLE && pullUp()) {
-                    startLoadMore(CustomSwipeLayout.FOOTER_DEFAULT_HEIGHT)
+                    startLoadMore(SwipeRefreshLayout.FOOTER_DEFAULT_HEIGHT)
                 }
             }
 

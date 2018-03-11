@@ -1,4 +1,4 @@
-package com.qcloud.qclib.pullrefresh
+package com.qcloud.qclib.refresh.pullrefresh
 
 import android.content.Context
 import android.support.v7.widget.GridLayoutManager
@@ -18,7 +18,7 @@ import com.qcloud.qclib.R
  * Author: Kuzan
  * Date: 2018/1/15 11:48.
  */
-class PullRefreshRecyclerView @JvmOverloads constructor(
+class PullRecyclerView @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0): PullRefreshView(context, attrs, defStyleAttr) {

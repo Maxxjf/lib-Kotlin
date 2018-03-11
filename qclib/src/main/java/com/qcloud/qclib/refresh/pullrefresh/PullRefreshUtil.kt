@@ -1,9 +1,11 @@
-package com.qcloud.qclib.pullrefresh
+package com.qcloud.qclib.refresh.pullrefresh
 
 import android.support.annotation.NonNull
 import android.view.View
-import com.qcloud.qclib.pullrefresh.listener.OnFooterStateListener
-import com.qcloud.qclib.pullrefresh.listener.OnHeaderStateListener
+import com.qcloud.qclib.refresh.listener.OnFooterStateListener
+import com.qcloud.qclib.refresh.listener.OnHeaderStateListener
+import com.qcloud.qclib.refresh.widget.FooterView
+import com.qcloud.qclib.refresh.widget.HeaderView
 
 /**
  * 类说明：下拉刷新上拉加载更多工具类
@@ -19,13 +21,13 @@ object PullRefreshUtil {
      * @param isUpLoadMore  是否开启上拉加载，默认关闭
      */
     fun setRefresh(view: PullRefreshView, isDownRefresh: Boolean = true, isUpLoadMore: Boolean = false) {
-        val headView: HeadView? = if (isDownRefresh) {
-            HeadView(view.context)
+        val headView: HeaderView? = if (isDownRefresh) {
+            HeaderView(view.context)
         } else {
             null
         }
-        val footView: FootView? = if (isUpLoadMore) {
-            FootView(view.context)
+        val footView: FooterView? = if (isUpLoadMore) {
+            FooterView(view.context)
         } else {
             null
         }
@@ -42,8 +44,8 @@ object PullRefreshUtil {
      * @param headerStateListener   头部监听器
      */
     fun setRefresh(@NonNull view: PullRefreshView, isDownRefresh: Boolean, isUpLoadMore: Boolean, headView: View?, headerStateListener: OnHeaderStateListener?) {
-        val footView: FootView? = if (isUpLoadMore) {
-            FootView(view.context)
+        val footView: FooterView? = if (isUpLoadMore) {
+            FooterView(view.context)
         } else {
             null
         }
@@ -60,8 +62,8 @@ object PullRefreshUtil {
      * @param footerStateListener   尾部监听器
      */
     fun setRefresh(@NonNull view: PullRefreshView, isDownRefresh: Boolean, isUpLoadMore: Boolean, footView: View?, footerStateListener: OnFooterStateListener?) {
-        val headView: HeadView? = if (isDownRefresh) {
-            HeadView(view.context)
+        val headView: HeaderView? = if (isDownRefresh) {
+            HeaderView(view.context)
         } else {
             null
         }

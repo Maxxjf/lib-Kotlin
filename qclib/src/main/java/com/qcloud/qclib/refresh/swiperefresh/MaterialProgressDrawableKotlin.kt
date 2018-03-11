@@ -20,7 +20,7 @@ import java.util.ArrayList
  * Author: gaobaiqiang
  * 2018/3/11 下午9:48.
  */
-class MaterialProgressDrawable(context: Context, private val mParent: View) : Drawable(), Animatable {
+class MaterialProgressDrawableKotlin(context: Context, private val mParent: View) : Drawable(), Animatable {
 
     private val COLORS = intArrayOf(Color.BLACK)
 
@@ -87,8 +87,8 @@ class MaterialProgressDrawable(context: Context, private val mParent: View) : Dr
      * Set the overall size for the progress spinner. This updates the radius
      * and stroke width of the ring.
      *
-     * @param size One of [MaterialProgressDrawable.LARGE] or
-     * [MaterialProgressDrawable.DEFAULT]
+     * @param size One of [MaterialProgressDrawableKotlin.LARGE] or
+     * [MaterialProgressDrawableKotlin.DEFAULT]
      */
     fun updateSizes(@ProgressDrawableSize size: Int) {
         if (size == LARGE) {

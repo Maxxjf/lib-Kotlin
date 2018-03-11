@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2014 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.qcloud.qclib.refresh.swiperefresh;
 
 import android.content.Context;
@@ -44,11 +28,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 
 /**
- * Fancy progress indicator for Material theme.
- *
- * @hide
+ * Description: 此类不能使用Kotlin实现，原因见Ring 里面的 invalidateSelf()方法
+ * Author: gaobaiqiang
+ * 2018/3/11 下午9:48.
  */
-class MaterialProgressDrawable2 extends Drawable implements Animatable {
+class MaterialProgressDrawable extends Drawable implements Animatable {
     private static final Interpolator LINEAR_INTERPOLATOR = new LinearInterpolator();
     private static final Interpolator END_CURVE_INTERPOLATOR = new EndCurveInterpolator();
     private static final Interpolator START_CURVE_INTERPOLATOR = new StartCurveInterpolator();
@@ -57,18 +41,18 @@ class MaterialProgressDrawable2 extends Drawable implements Animatable {
     @Retention(RetentionPolicy.CLASS)
     @IntDef({LARGE, DEFAULT})
     public @interface ProgressDrawableSize {}
-    // Maps to ProgressBar.Large style
-    static final int LARGE = 0;
-    // Maps to ProgressBar default style
-    static final int DEFAULT = 1;
+    // 大图
+    public static final int LARGE = 0;
+    // 默认图
+    public static final int DEFAULT = 1;
 
-    // Maps to ProgressBar default style
-    private static final int CIRCLE_DIAMETER = 40;
+    // 默认图
+    public static final int CIRCLE_DIAMETER = 40;
     private static final float CENTER_RADIUS = 8.75f; //should add up to 10 when + stroke_width
     private static final float STROKE_WIDTH = 2.5f;
 
-    // Maps to ProgressBar.Large style
-    private static final int CIRCLE_DIAMETER_LARGE = 56;
+    // 大图
+    public static final int CIRCLE_DIAMETER_LARGE = 56;
     private static final float CENTER_RADIUS_LARGE = 12.5f;
     private static final float STROKE_WIDTH_LARGE = 3f;
 
@@ -108,7 +92,7 @@ class MaterialProgressDrawable2 extends Drawable implements Animatable {
     private double mHeight;
     private Animation mFinishAnimation;
 
-    public MaterialProgressDrawable2(Context context, View parent) {
+    public MaterialProgressDrawable(Context context, View parent) {
         mParent = parent;
         mResources = context.getResources();
 
