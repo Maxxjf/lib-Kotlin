@@ -60,6 +60,8 @@ dependencies {
     api 'com.shizhefei:ViewPagerIndicator:1.1.6'
     // RecyclerView
     api rootProject.ext.dependencies["recyclerview_v7"]
+    // CardView
+    api rootProject.ext.dependencies["cardview_v7"]
 
     // fastjson解析
     api 'com.google.code.gson:gson:2.8.1'
