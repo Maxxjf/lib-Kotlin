@@ -1,4 +1,4 @@
-package com.qcloud.qclib.pullrefresh
+package com.qcloud.qclib.refresh.widget
 
 import android.content.Context
 import android.graphics.drawable.AnimationDrawable
@@ -10,14 +10,14 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.qcloud.qclib.R
-import com.qcloud.qclib.pullrefresh.listener.OnFooterStateListener
+import com.qcloud.qclib.refresh.listener.OnFooterStateListener
 
 /**
  * 类说明：上接加载更多底部View
  * Author: Kuzan
  * Date: 2018/1/12 16:46.
  */
-class FootView(@NonNull context: Context): LinearLayout(context), OnFooterStateListener {
+class FooterView(@NonNull context: Context): LinearLayout(context), OnFooterStateListener {
 
     private var mIvFooterDownArrow: ImageView? = null
     private var mIvFooterLoading: ImageView? = null

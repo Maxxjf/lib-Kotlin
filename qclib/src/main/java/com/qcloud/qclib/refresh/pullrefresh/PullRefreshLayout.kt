@@ -1,4 +1,4 @@
-package com.qcloud.qclib.pullrefresh
+package com.qcloud.qclib.refresh.pullrefresh
 
 import android.content.Context
 import android.support.annotation.IntRange
@@ -11,18 +11,19 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.ListView
 import android.widget.ScrollView
-import com.qcloud.qclib.pullrefresh.listener.OnFooterStateListener
-import com.qcloud.qclib.pullrefresh.listener.OnHeaderStateListener
-import com.qcloud.qclib.pullrefresh.listener.OnPullDownRefreshListener
-import com.qcloud.qclib.pullrefresh.listener.OnPullUpLoadMoreListener
+import com.qcloud.qclib.refresh.listener.OnFooterStateListener
+import com.qcloud.qclib.refresh.listener.OnHeaderStateListener
+import com.qcloud.qclib.refresh.listener.OnPullDownRefreshListener
+import com.qcloud.qclib.refresh.listener.OnPullUpLoadMoreListener
 
 /**
  * 类说明：自定义的上下拉刷新控件
  * Author: Kuzan
  * Date: 2018/1/12 16:58.
  */
-open class PullRefreshView @JvmOverloads constructor(
+open class PullRefreshLayout @JvmOverloads constructor(
         protected val mContext: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0): ViewGroup(mContext, attrs, defStyleAttr) {
@@ -107,7 +108,7 @@ open class PullRefreshView @JvmOverloads constructor(
         mHeadLayout?.removeAllViews()
         mHeadLayout?.addView(mHead)
         mHeadHeight = measureViewHeight(mHead!!)
-        log("mHeadHeight" + mHeadHeight)
+
         if (isPullDown) {
             scroll(-mHeadHeight)
         }
@@ -136,7 +137,7 @@ open class PullRefreshView @JvmOverloads constructor(
 
         // 获取底部高度
         mFootHeight = measureViewHeight(mFootLayout!!)
-        log("mFootHeight" + mFootHeight)
+
         if (isPullUp) {
             scroll(mFootHeight)
         }
@@ -361,7 +362,7 @@ open class PullRefreshView @JvmOverloads constructor(
 
                 if (count > 2) {
                     val content = getChildAt(2)
-                    if (content is RecyclerView) {
+                    if (content is RecyclerView || content is ListView) {
                         content.scrollBy(0, FOOT_DEFAULT_HEIGHT)
                     }
                 }
@@ -390,12 +391,10 @@ open class PullRefreshView @JvmOverloads constructor(
      * @param damp
      */
     fun setDamp(@IntRange(from = 1, to = 10) damp: Int) {
-        if (damp < 1) {
-            mDamp = 1
-        } else if (damp > 10) {
-            mDamp = 10
-        } else {
-            mDamp = damp
+        mDamp = when {
+            damp < 1 -> 1
+            damp > 10 -> 10
+            else -> damp
         }
     }
 
@@ -552,7 +551,7 @@ open class PullRefreshView @JvmOverloads constructor(
      * 静态变量
      * */
     companion object {
-        private val TAG = PullRefreshView::class.java.simpleName
+        private val TAG = PullRefreshLayout::class.java.simpleName
 
         /**头部下拉的最小高度*/
         private val HEAD_DEFAULT_HEIGHT: Int = 100

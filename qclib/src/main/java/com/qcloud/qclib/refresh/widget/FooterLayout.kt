@@ -1,4 +1,4 @@
-package com.qcloud.qclib.swiperefresh
+package com.qcloud.qclib.refresh.widget
 
 import android.content.Context
 import android.support.annotation.LayoutRes

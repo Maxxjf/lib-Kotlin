@@ -1,4 +1,4 @@
-package com.qcloud.qclib.pullrefresh
+package com.qcloud.qclib.refresh.widget
 
 import android.content.Context
 import android.graphics.drawable.AnimationDrawable
@@ -10,15 +10,14 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.qcloud.qclib.R
-import com.qcloud.qclib.pullrefresh.listener.OnHeaderStateListener
-import timber.log.Timber
+import com.qcloud.qclib.refresh.listener.OnHeaderStateListener
 
 /**
  * 类说明：下拉刷新头部View
  * Author: Kuzan
  * Date: 2018/1/12 15:47.
  */
-class HeadView(@NonNull context: Context): LinearLayout(context), OnHeaderStateListener {
+class HeaderView(@NonNull context: Context): LinearLayout(context), OnHeaderStateListener {
 
     private var mIvHeaderDownArrow: ImageView? = null
     private var mIvHeaderLoading: ImageView? = null
@@ -63,7 +62,6 @@ class HeadView(@NonNull context: Context): LinearLayout(context), OnHeaderStateL
     }
 
     override fun onRefreshHead(head: View?) {
-        Timber.e("=======>>>onRefreshHead")
         mIvHeaderDownArrow?.visibility = View.GONE
         mIvHeaderLoading?.visibility = View.VISIBLE
         mIvHeaderLoading?.setImageDrawable(animationDrawable)
