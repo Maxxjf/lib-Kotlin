@@ -1059,10 +1059,10 @@ open class SwipeRefreshLayout @JvmOverloads constructor(
      * 自动加载更多
      */
     protected fun autoLoadMore(offset: Int) {
-        if (offset > 0 && mCurrentAction != ACTION_UP) {
+        if (mRefreshing || mCurrentAction == ACTION_DOWN || mCurrentAction == ACTION_UP) {
             return
         }
-
+        mCurrentAction = ACTION_UP
         mScrollOffset = Math.abs(offset)
 
         scrollTo(0, offset)
@@ -1181,13 +1181,7 @@ open class SwipeRefreshLayout @JvmOverloads constructor(
      * 是否上拉加载更多
      */
     protected fun pullUp(): Boolean {
-        if (mCurrentAction != ACTION_DOWN && isPullLoadEnable) {
-            mCurrentAction = ACTION_UP
-            return true
-        } else {
-            return false
-        }
-        //return mCurrentAction != ACTION_DOWN && isPullLoadEnable
+        return mCurrentAction != ACTION_DOWN && isPullLoadEnable
     }
 
     /**
