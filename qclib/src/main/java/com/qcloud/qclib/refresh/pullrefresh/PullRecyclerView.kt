@@ -21,7 +21,7 @@ import com.qcloud.qclib.R
 class PullRecyclerView @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0): PullRefreshView(context, attrs, defStyleAttr) {
+        defStyleAttr: Int = 0): PullRefreshLayout(context, attrs, defStyleAttr) {
 
     /**内置的RecyclerView*/
     var mRecyclerView: RecyclerView? = null

@@ -23,7 +23,7 @@ import com.qcloud.qclib.refresh.listener.OnPullUpLoadMoreListener
  * Author: Kuzan
  * Date: 2018/1/12 16:58.
  */
-open class PullRefreshView @JvmOverloads constructor(
+open class PullRefreshLayout @JvmOverloads constructor(
         protected val mContext: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0): ViewGroup(mContext, attrs, defStyleAttr) {
@@ -551,7 +551,7 @@ open class PullRefreshView @JvmOverloads constructor(
      * 静态变量
      * */
     companion object {
-        private val TAG = PullRefreshView::class.java.simpleName
+        private val TAG = PullRefreshLayout::class.java.simpleName
 
         /**头部下拉的最小高度*/
         private val HEAD_DEFAULT_HEIGHT: Int = 100

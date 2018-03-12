@@ -16,64 +16,64 @@ object PullRefreshUtil {
     /**
      * 刷新控件的基本配件 (头部、尾部都用默认的)
      *
-     * @param view          刷新控件
+     * @param layout          刷新控件
      * @param isDownRefresh 是否开启下拉刷新，默认开启
      * @param isUpLoadMore  是否开启上拉加载，默认关闭
      */
-    fun setRefresh(view: PullRefreshView, isDownRefresh: Boolean = true, isUpLoadMore: Boolean = false) {
+    fun setRefresh(layout: PullRefreshLayout, isDownRefresh: Boolean = true, isUpLoadMore: Boolean = false) {
         val headView: HeaderView? = if (isDownRefresh) {
-            HeaderView(view.context)
+            HeaderView(layout.context)
         } else {
             null
         }
         val footView: FooterView? = if (isUpLoadMore) {
-            FooterView(view.context)
+            FooterView(layout.context)
         } else {
             null
         }
-        setRefresh(view, isDownRefresh, isUpLoadMore, headView, footView, headView, footView)
+        setRefresh(layout, isDownRefresh, isUpLoadMore, headView, footView, headView, footView)
     }
 
     /**
      * 刷新控件的基本配件 (自定义头部、尾部用默认的)
      *
-     * @param view                  刷新控件
+     * @param layout                  刷新控件
      * @param isDownRefresh         是否开启下拉刷新
      * @param isUpLoadMore          是否开启上拉加载
      * @param headView              头部View
      * @param headerStateListener   头部监听器
      */
-    fun setRefresh(@NonNull view: PullRefreshView, isDownRefresh: Boolean, isUpLoadMore: Boolean, headView: View?, headerStateListener: OnHeaderStateListener?) {
+    fun setRefresh(@NonNull layout: PullRefreshLayout, isDownRefresh: Boolean, isUpLoadMore: Boolean, headView: View?, headerStateListener: OnHeaderStateListener?) {
         val footView: FooterView? = if (isUpLoadMore) {
-            FooterView(view.context)
+            FooterView(layout.context)
         } else {
             null
         }
-        setRefresh(view, isDownRefresh, isUpLoadMore, headView, footView, headerStateListener, footView)
+        setRefresh(layout, isDownRefresh, isUpLoadMore, headView, footView, headerStateListener, footView)
     }
 
     /**
      * 刷新控件的基本配件 (自定义尾部 、头部用默认的)
      *
-     * @param view                  刷新控件
+     * @param layout                  刷新控件
      * @param isDownRefresh         是否开启下拉刷新
      * @param isUpLoadMore          是否开启上拉加载
      * @param footView              尾部View
      * @param footerStateListener   尾部监听器
      */
-    fun setRefresh(@NonNull view: PullRefreshView, isDownRefresh: Boolean, isUpLoadMore: Boolean, footView: View?, footerStateListener: OnFooterStateListener?) {
+    fun setRefresh(@NonNull layout: PullRefreshLayout, isDownRefresh: Boolean, isUpLoadMore: Boolean, footView: View?, footerStateListener: OnFooterStateListener?) {
         val headView: HeaderView? = if (isDownRefresh) {
-            HeaderView(view.context)
+            HeaderView(layout.context)
         } else {
             null
         }
-        setRefresh(view, isDownRefresh, isUpLoadMore, headView, footView, headView, footerStateListener)
+        setRefresh(layout, isDownRefresh, isUpLoadMore, headView, footView, headView, footerStateListener)
     }
 
     /**
      * 刷新控件的基本配件 （自定义头部、尾部）
      *
-     * @param view                  刷新控件
+     * @param layout                  刷新控件
      * @param isDownRefresh         是否开启下拉刷新
      * @param isUpLoadMore          是否开启上拉加载
      * @param headView              头部View
@@ -81,18 +81,18 @@ object PullRefreshUtil {
      * @param headerStateListener   头部监听器
      * @param footerStateListener   尾部监听器
      */
-    fun setRefresh(@NonNull view: PullRefreshView, isDownRefresh: Boolean, isUpLoadMore: Boolean, headView: View?, footView: View?,
+    fun setRefresh(@NonNull layout: PullRefreshLayout, isDownRefresh: Boolean, isUpLoadMore: Boolean, headView: View?, footView: View?,
                    headerStateListener: OnHeaderStateListener?, footerStateListener: OnFooterStateListener?) {
-        view.setRefresh(isDownRefresh, isUpLoadMore)
+        layout.setRefresh(isDownRefresh, isUpLoadMore)
         // 下拉刷新
         if (isDownRefresh && headView != null) {
-            view.setHead(headView)
-            view.onHeaderStateListener = headerStateListener
+            layout.setHead(headView)
+            layout.onHeaderStateListener = headerStateListener
         }
         // 上拉加载
         if (isUpLoadMore && footView != null) {
-            view.setFoot(footView)
-            view.onFooterStateListener = footerStateListener
+            layout.setFoot(footView)
+            layout.onFooterStateListener = footerStateListener
         }
     }
 }

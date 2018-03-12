@@ -2,9 +2,14 @@ package com.qcloud.qclib.refresh.swiperefresh
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -30,6 +35,10 @@ class SwipeRecyclerView @JvmOverloads constructor(
     var isShowEmpty: Boolean = false
     /** 是否自动上拉刷新 */
     var isAutomaticUp: Boolean = false
+    /**可见的最后一个item*/
+    private var lastVisibleItem: Int = 0
+    /**可见的第一个item*/
+    private var firstVisibleItem: Int = 0
 
     /** 获取RecyclerView所在的位置 */
     private val recyclerViewIndex: Int
@@ -73,16 +82,84 @@ class SwipeRecyclerView @JvmOverloads constructor(
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                if (isAutomaticUp && newState == RecyclerView.SCROLL_STATE_IDLE && pullUp()) {
-                    startLoadMore(SwipeRefreshLayout.FOOTER_DEFAULT_HEIGHT)
+                if (isAutomaticUp && newState == RecyclerView.SCROLL_STATE_IDLE && pullUp() && isBottom()) {
+                    autoLoadMore(SwipeRefreshLayout.FOOTER_DEFAULT_HEIGHT)
                 }
             }
 
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-
+                getVisibleItem()
             }
         })
+    }
+
+    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
+        when (ev.action) {
+            MotionEvent.ACTION_DOWN -> getVisibleItem()
+        }
+        return super.onInterceptTouchEvent(ev)
+    }
+
+    private fun isBottom(): Boolean {
+        return if (recyclerView == getTarget() && lastVisibleItem != recyclerView.adapter.itemCount - 1) {
+                false
+            } else {
+                val view: View? = getFooter()
+                if (view == null) {
+                    false
+                } else {
+                    val bottomMargin = ((view.layoutParams) as MarginLayoutParams).bottomMargin
+                    view.bottom  + bottomMargin + view.paddingBottom <= height
+                }
+            }
+    }
+
+    /**
+     * 获取当前第一个显示的item 和 最后一个显示的item.
+     */
+    private fun getVisibleItem() {
+        val manager = recyclerView?.layoutManager
+        if (manager != null) {
+            when (manager) {
+                is LinearLayoutManager -> {
+                    lastVisibleItem = manager.findLastVisibleItemPosition()
+                    firstVisibleItem = manager.findFirstVisibleItemPosition()
+                }
+                is GridLayoutManager -> {
+                    lastVisibleItem = manager.findLastVisibleItemPosition()
+                    firstVisibleItem = manager.findFirstVisibleItemPosition()
+                }
+                is StaggeredGridLayoutManager -> {
+                    val lastPositions = IntArray(manager.spanCount)
+                    manager.findLastVisibleItemPositions(lastPositions)
+                    lastVisibleItem = getMax(lastPositions)
+
+                    val firstPositions = IntArray(manager.spanCount)
+                    manager.findFirstVisibleItemPositions(firstPositions)
+                    firstVisibleItem = getMin(firstPositions)
+                }
+            }
+        }
+    }
+
+    private fun getMax(arrs: IntArray): Int {
+        var max = arrs[0]
+        (1 until arrs.size)
+                .asSequence()
+                .filter { arrs[it] > max }
+                .forEach { max = arrs[it] }
+        return max
+    }
+
+    private fun getMin(arrs: IntArray): Int {
+        var min = arrs[0]
+        (1 until arrs.size)
+                .asSequence()
+                .filter { arrs[it] < min }
+                .forEach { min = arrs[it] }
+
+        return min
     }
 
     /**

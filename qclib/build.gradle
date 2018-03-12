@@ -47,7 +47,7 @@ dependencies {
     api 'com.lzy.net:okrx2:2.0.2'
 
     // rxjava
-    api 'io.reactivex.rxjava2:rxjava:2.1.1'
+    api 'io.reactivex.rxjava2:rxjava:2.1.9'
     api 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     // 图片加载器Glide
@@ -62,7 +62,7 @@ dependencies {
     api rootProject.ext.dependencies["recyclerview_v7"]
 
     // fastjson解析
-    api 'com.google.code.gson:gson:2.8.1'
+    api 'com.google.code.gson:gson:2.8.2'
     implementation 'com.readystatesoftware.chuck:library:1.0.4'
 
     // 加载进度条

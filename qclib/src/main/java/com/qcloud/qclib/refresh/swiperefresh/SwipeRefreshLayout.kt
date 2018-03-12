@@ -16,6 +16,7 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.Transformation
 import android.widget.AbsListView
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import com.qcloud.qclib.R
 import com.qcloud.qclib.refresh.listener.LoadMoreAnimatorListener
 import com.qcloud.qclib.refresh.listener.MyAnimationListener
@@ -1055,6 +1056,24 @@ open class SwipeRefreshLayout @JvmOverloads constructor(
     }
 
     /**
+     * 自动加载更多
+     */
+    protected fun autoLoadMore(offset: Int) {
+        if (offset > 0 && mCurrentAction != ACTION_UP) {
+            return
+        }
+
+        mScrollOffset = Math.abs(offset)
+
+        scrollTo(0, offset)
+
+        if (onFooterStateListener != null && isMore) {
+            onFooterStateListener!!.onRefreshFoot(mFooter)
+        }
+        startLoadMore(offset)
+    }
+
+    /**
      * 重置加载状态
      */
     private fun resetLoadMoreState() {
@@ -1134,16 +1153,9 @@ open class SwipeRefreshLayout @JvmOverloads constructor(
                 onFooterStateListener!!.onRetractFoot(mFooter)
             }
 
-            var content: View? = null
-            for (i in 0 until childCount) {
-                val child = getChildAt(i)
-                if (child != mCircleView && child != mFooterLayout) {
-                    content = child
-                    break
-                }
-            }
-            if (content != null && content is RecyclerView || content is AbsListView) {
-                content.scrollBy(0, FOOTER_DEFAULT_HEIGHT)
+            ensureTarget()
+            if (mTarget != null && mTarget is RecyclerView || mTarget is AbsListView) {
+                mTarget?.scrollBy(0, FOOTER_DEFAULT_HEIGHT)
             }
         }
     }
@@ -1169,7 +1181,13 @@ open class SwipeRefreshLayout @JvmOverloads constructor(
      * 是否上拉加载更多
      */
     protected fun pullUp(): Boolean {
-        return mCurrentAction != ACTION_DOWN && isPullLoadEnable
+        if (mCurrentAction != ACTION_DOWN && isPullLoadEnable) {
+            mCurrentAction = ACTION_UP
+            return true
+        } else {
+            return false
+        }
+        //return mCurrentAction != ACTION_DOWN && isPullLoadEnable
     }
 
     /**
@@ -1199,6 +1217,15 @@ open class SwipeRefreshLayout @JvmOverloads constructor(
 
     protected fun resetTarget() {
         mTarget = null
+    }
+
+    fun getTarget(): View? {
+        ensureTarget()
+        return mTarget
+    }
+
+    fun getFooter(): View? {
+        return mFooter
     }
 
     /**
