@@ -1,0 +1,112 @@
+<resources>
+    <!-- dpi = 2 -->
+
+    <!-- 文字大小定义 -->
+    <!-- 小号字体 -->
+    <dimen name="mini_text_size">10sp</dimen>
+    <!-- 小字提示 -->
+    <dimen name="small_text_size">12sp</dimen>
+    <!-- 文本字体 -->
+    <dimen name="micro_text_size">14sp</dimen>
+    <!-- 按钮字体 -->
+    <dimen name="btn_text_size">14sp</dimen>
+    <!-- 标题字体 -->
+    <dimen name="title_text_size">16sp</dimen>
+    <!-- Appbar字体 -->
+    <dimen name="appbar_text_size">20sp</dimen>
+    <!-- 大号字体 -->
+    <dimen name="large_text_size">24sp</dimen>
+    <!-- 加大号字体 -->
+    <dimen name="xlarge_text_size">34sp</dimen>
+    <!-- 加加大号字体 -->
+    <dimen name="xxlarge_text_size">45sp</dimen>
+    <!-- 加加加大号字体 -->
+    <dimen name="xxxlarge_text_size">56sp</dimen>
+
+    <!-- 控件定义 栅格系统的最小单位是8dp，一切距离、尺寸都应该是8dp的整数倍 -->
+    <!-- 状态栏高度 -->
+    <dimen name="status_bar_height">24dp</dimen>
+    <!-- Appbar最小高度 -->
+    <dimen name="appbar_height">56dp</dimen>
+    <!-- 底部导航栏高度 -->
+    <dimen name="actionbar_height">48dp</dimen>
+    <!-- 悬浮按钮大尺寸 -->
+    <dimen name="float_btn_large_size">56dp</dimen>
+    <!-- 悬浮按钮大尺寸 -->
+    <dimen name="float_btn_size">40dp</dimen>
+    <!-- 用户头像 -->
+    <dimen name="user_head_size">64dp</dimen>
+    <!-- 用户小头像 -->
+    <dimen name="user_head_small_size">40dp</dimen>
+    <!-- 小图标点击区域 -->
+    <dimen name="icon_click_size">48dp</dimen>
+    <!-- 卡片间距 -->
+    <dimen name="card_margin">8dp</dimen>
+    <!-- 分隔线上下留白 -->
+    <dimen name="line_margin">8dp</dimen>
+    <!-- 屏幕左右对齐基线 -->
+    <dimen name="layout_margin">16dp</dimen>
+    <!-- 侧边抽屉到屏幕右边的距离 -->
+    <dimen name="drawer_margin_right">56dp</dimen>
+    <!-- 控件留白 -->
+    <dimen name="view_padding">16dp</dimen>
+    <!-- 小按钮高度 -->
+    <dimen name="small_btn_height">32dp</dimen>
+    <!-- 一般控件高度 -->
+    <dimen name="btn_height">48dp</dimen>
+    <!-- 大按钮高度 -->
+    <dimen name="large_btn_height">64dp</dimen>
+    <!-- 弹窗按钮高度 -->
+    <dimen name="dialog_btn_height">56dp</dimen>
+    <!-- 按钮最小宽度 -->
+    <dimen name="min_button_width">96dp</dimen>
+    <!-- Tab 高度 -->
+    <dimen name="tab_height">56dp</dimen>
+    <!-- 分隔线高度 -->
+    <dimen name="line_height">1dp</dimen>
+
+    <!-- 圆角 -->
+    <dimen name="radius_size">8dp</dimen>
+    <!-- 大圆角 -->
+    <dimen name="big_radius_size">16dp</dimen>
+    <!-- 文字边距 -->
+    <dimen name="text_padding">8dp</dimen>
+    <!-- 图文间距 -->
+    <dimen name="draw_padding">8dp</dimen>
+    <!-- 画笔宽度 -->
+    <dimen name="store_width">2dp</dimen>
+
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_1">8dp</dimen>
+    <dimen name="margin_2">16dp</dimen>
+    <dimen name="margin_3">24dp</dimen>
+    <dimen name="margin_4">32dp</dimen>
+    <dimen name="margin_5">40dp</dimen>
+    <dimen name="margin_6">48dp</dimen>
+    <dimen name="margin_7">56dp</dimen>
+    <dimen name="margin_8">64dp</dimen>
+    <dimen name="margin_9">72dp</dimen>
+    <dimen name="margin_10">80dp</dimen>
+    <dimen name="margin_11">88dp</dimen>
+    <dimen name="margin_12">96dp</dimen>
+    <dimen name="margin_20">160dp</dimen>
+    <dimen name="margin_30">240dp</dimen>
+    <dimen name="margin_40">320dp</dimen>
+    <dimen name="margin_50">400dp</dimen>
+
+    <dimen name="padding_1">4dp</dimen>
+    <dimen name="padding_2">8dp</dimen>
+    <dimen name="padding_3">12dp</dimen>
+    <dimen name="padding_4">16dp</dimen>
+    <dimen name="padding_5">20dp</dimen>
+    <dimen name="padding_6">24dp</dimen>
+    <dimen name="padding_7">28dp</dimen>
+    <dimen name="padding_8">32dp</dimen>
+    <dimen name="padding_9">36dp</dimen>
+    <dimen name="padding_10">40dp</dimen>
+    <dimen name="padding_11">44dp</dimen>
+    <dimen name="padding_12">48dp</dimen>
+    <dimen name="padding_13">52dp</dimen>
+    <dimen name="padding_14">56dp</dimen>
+    <dimen name="padding_15">60dp</dimen>
+</resources>

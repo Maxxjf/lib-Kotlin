@@ -11,7 +11,7 @@ import com.qcloud.qclib.utils.ColorUtil
  * Author: Kuzan
  * Date: 2018/2/7 14:18.
  */
-class SnackbarConfig private constructor() {
+class SnackbarConfig constructor() {
     // 字体颜色 白色
     @ColorInt
     private var defaultTextColor = ColorUtil.parseColor("#FFFFFF")

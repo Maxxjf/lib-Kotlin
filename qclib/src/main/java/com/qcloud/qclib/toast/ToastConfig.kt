@@ -11,7 +11,7 @@ import com.qcloud.qclib.R
  * Author: Kuzan
  * Date: 2017/12/20 13:51.
  */
-class ToastConfig private constructor() {
+class ToastConfig constructor() {
     // 字体颜色 白色
     @ColorInt private var defaultTextColor = Color.parseColor("#FFFFFF")
     // 错误颜色 红色
