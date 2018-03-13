@@ -59,6 +59,6 @@
         android:id="@+id/wheel_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="@dimen/margin_60"/>
+        android:minHeight="@dimen/margin_50"/>
 
 </LinearLayout>

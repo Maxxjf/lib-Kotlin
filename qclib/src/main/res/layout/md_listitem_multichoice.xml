@@ -33,7 +33,7 @@
         android:paddingLeft="@dimen/padding_3"
         android:paddingStart="@dimen/padding_3"
         android:paddingTop="@dimen/padding_4"
-        android:textSize="@dimen/medium_text_size"
+        android:textSize="@dimen/title_text_size"
         tools:ignore="NewApi,RtlSymmetry"
         tools:text="Item"/>
 

@@ -21,7 +21,7 @@
             android:paddingRight="@dimen/layout_margin"
             android:gravity="center"
             android:textColor="@color/colorDark"
-            android:textSize="@dimen/small_text_size"
+            android:textSize="@dimen/btn_text_size"
             android:text="@string/btn_cancel"/>
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:textColor="@color/colorDark"
-            android:textSize="@dimen/small_text_size"
+            android:textSize="@dimen/title_text_size"
             tools:text="请选择"/>
 
         <TextView
@@ -44,7 +44,7 @@
             android:paddingRight="@dimen/layout_margin"
             android:gravity="center"
             android:textColor="@color/colorDark"
-            android:textSize="@dimen/small_text_size"
+            android:textSize="@dimen/btn_text_size"
             android:text="@string/btn_finish"/>
 
     </RelativeLayout>
@@ -76,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:minHeight="@dimen/margin_60"/>
+                android:minHeight="@dimen/margin_50"/>
 
             <TextView
                 android:id="@+id/tv_year"
@@ -100,7 +100,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:minHeight="@dimen/margin_60"/>
+                android:minHeight="@dimen/margin_50"/>
 
             <TextView
                 android:id="@+id/tv_month"
@@ -124,7 +124,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:minHeight="@dimen/margin_60"/>
+                android:minHeight="@dimen/margin_50"/>
 
             <TextView
                 android:id="@+id/tv_day"
@@ -148,7 +148,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:minHeight="@dimen/margin_60"/>
+                android:minHeight="@dimen/margin_50"/>
 
             <TextView
                 android:id="@+id/tv_hour"
@@ -172,7 +172,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:minHeight="@dimen/margin_60"/>
+                android:minHeight="@dimen/margin_50"/>
 
             <TextView
                 android:id="@+id/tv_minute"

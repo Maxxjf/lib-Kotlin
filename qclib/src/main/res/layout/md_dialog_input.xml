@@ -25,9 +25,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/padding_4"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="@dimen/padding_1"
             android:fontFamily="sans-serif"
-            android:textSize="@dimen/medium_text_size"
+            android:textSize="@dimen/micro_text_size"
             tools:ignore="UnusedAttribute"
             tools:text="Message"/>
 
@@ -43,7 +43,7 @@
                 android:layout_marginLeft="-2dp"
                 android:layout_marginRight="-2dp"
                 android:focusable="true"
-                android:textSize="@dimen/medium_text_size"
+                android:textSize="@dimen/micro_text_size"
                 tools:ignore="TextFields"/>
 
             <TextView

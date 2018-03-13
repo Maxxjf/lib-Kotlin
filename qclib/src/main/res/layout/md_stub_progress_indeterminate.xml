@@ -23,10 +23,10 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
         android:gravity="start"
-        android:paddingLeft="16dp"
-        android:paddingStart="16dp"
+        android:paddingLeft="@dimen/layout_margin"
+        android:paddingStart="@dimen/layout_margin"
         android:textAlignment="viewStart"
-        android:textSize="@dimen/medium_text_size"
+        android:textSize="@dimen/micro_text_size"
         tools:ignore="NewApi,RtlSymmetry,UnusedAttribute"
         tools:text="Message"/>
 

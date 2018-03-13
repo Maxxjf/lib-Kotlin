@@ -25,9 +25,9 @@
             android:layout_marginBottom="@dimen/padding_4"
             android:layout_marginLeft="@dimen/padding_12"
             android:layout_marginRight="@dimen/padding_12"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="@dimen/padding_1"
             android:fontFamily="sans-serif"
-            android:textSize="@dimen/medium_text_size"
+            android:textSize="@dimen/micro_text_size"
             tools:ignore="UnusedAttribute"
             tools:text="Message"/>
 
@@ -44,7 +44,7 @@
                 android:layout_marginBottom="1dp"
                 android:layout_marginLeft="-2dp"
                 android:layout_marginRight="-2dp"
-                android:textSize="@dimen/medium_text_size"
+                android:textSize="@dimen/micro_text_size"
                 tools:ignore="TextFields"/>
 
             <TextView

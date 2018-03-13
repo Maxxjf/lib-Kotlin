@@ -30,7 +30,7 @@
                 android:layout_marginBottom="@dimen/view_padding"
                 android:paddingLeft="@dimen/padding_12"
                 android:paddingRight="@dimen/padding_12"
-                android:textSize="@dimen/medium_text_size"
+                android:textSize="@dimen/micro_text_size"
                 tools:text="Content"/>
 
         </ScrollView>
