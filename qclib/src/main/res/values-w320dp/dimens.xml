@@ -1,5 +1,7 @@
 <resources>
     <!-- dpi = 1.5 -->
+    <dimen name="activity_horizontal_margin">12dp</dimen>
+    <dimen name="activity_vertical_margin">12dp</dimen>
 
     <!-- 文字大小定义 -->
     <!-- 小号字体 -->
