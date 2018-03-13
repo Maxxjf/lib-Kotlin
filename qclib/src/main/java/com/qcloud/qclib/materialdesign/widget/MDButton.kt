@@ -24,7 +24,7 @@ class MDButton @JvmOverloads constructor(
     var isStacked = false
     var stackedGravity: GravityEnum = GravityEnum.END
 
-    private val stackedEndPadding: Int = context.resources.getDimensionPixelSize(R.dimen.small_btn_height)
+    private val stackedEndPadding: Int = context.resources.getDimensionPixelSize(R.dimen.btn_height)
     private var stackedBackground: Drawable? = null
     private var defaultBackground: Drawable? = null
 

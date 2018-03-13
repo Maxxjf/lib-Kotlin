@@ -8,10 +8,10 @@
     android:focusable="true"
     android:minHeight="@dimen/tab_height"
     android:orientation="horizontal"
-    android:paddingEnd="@dimen/padding_12"
-    android:paddingLeft="@dimen/padding_12"
-    android:paddingRight="@dimen/padding_12"
-    android:paddingStart="@dimen/padding_12"
+    android:paddingEnd="@dimen/padding_6"
+    android:paddingLeft="@dimen/padding_6"
+    android:paddingRight="@dimen/padding_6"
+    android:paddingStart="@dimen/padding_6"
     tools:gravity="start|center_vertical">
 
     <android.support.v7.widget.AppCompatRadioButton
@@ -29,10 +29,10 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:minHeight="@dimen/tab_height"
-        android:paddingBottom="@dimen/padding_4"
-        android:paddingLeft="@dimen/padding_3"
-        android:paddingStart="@dimen/padding_3"
-        android:paddingTop="@dimen/padding_4"
+        android:paddingBottom="@dimen/padding_2"
+        android:paddingLeft="@dimen/padding_1"
+        android:paddingStart="@dimen/padding_1"
+        android:paddingTop="@dimen/padding_2"
         android:textSize="@dimen/title_text_size"
         tools:ignore="NewApi,RtlSymmetry"
         tools:text="Item"/>

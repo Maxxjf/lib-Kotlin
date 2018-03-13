@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/padding_10"
-        android:layout_marginTop="@dimen/padding_2"
+        android:layout_marginBottom="@dimen/padding_5"
+        android:layout_marginTop="@dimen/padding_1"
         android:fontFamily="sans-serif"
         android:textSize="@dimen/micro_text_size"
         tools:text="Message"/>

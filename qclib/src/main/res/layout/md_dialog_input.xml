@@ -14,17 +14,17 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/padding_4"
-        android:paddingLeft="@dimen/padding_12"
-        android:paddingRight="@dimen/padding_12"
-        android:paddingTop="@dimen/padding_4">
+        android:paddingBottom="@dimen/padding_2"
+        android:paddingLeft="@dimen/padding_6"
+        android:paddingRight="@dimen/padding_6"
+        android:paddingTop="@dimen/padding_2">
 
         <TextView
             android:id="@+id/md_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/padding_4"
+            android:layout_marginBottom="@dimen/padding_2"
             android:layout_marginTop="@dimen/padding_1"
             android:fontFamily="sans-serif"
             android:textSize="@dimen/micro_text_size"
@@ -55,11 +55,11 @@
                 android:layout_below="@android:id/input"
                 android:fontFamily="sans-serif"
                 android:gravity="end"
-                android:minWidth="48dp"
+                android:minWidth="@dimen/actionbar_height"
                 android:paddingEnd="4dp"
                 android:paddingRight="4dp"
                 android:textAlignment="viewEnd"
-                android:textSize="12sp"
+                android:textSize="@dimen/small_text_size"
                 tools:ignore="RtlSymmetry,UnusedAttribute"
                 tools:text="50/100"/>
 

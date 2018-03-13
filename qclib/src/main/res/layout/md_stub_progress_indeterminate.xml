@@ -6,10 +6,10 @@
     android:layout_height="wrap_content"
     android:gravity="start|center_vertical"
     android:orientation="horizontal"
-    android:paddingBottom="@dimen/padding_4"
-    android:paddingLeft="@dimen/padding_12"
-    android:paddingRight="@dimen/padding_12"
-    android:paddingTop="@dimen/padding_4">
+    android:paddingBottom="@dimen/padding_2"
+    android:paddingLeft="@dimen/padding_6"
+    android:paddingRight="@dimen/padding_6"
+    android:paddingTop="@dimen/padding_2">
 
     <ProgressBar
         android:id="@android:id/progress"
@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
         android:gravity="start"
-        android:paddingLeft="@dimen/layout_margin"
-        android:paddingStart="@dimen/layout_margin"
+        android:paddingLeft="@dimen/padding_2"
+        android:paddingStart="@dimen/padding_2"
         android:textAlignment="viewStart"
         android:textSize="@dimen/micro_text_size"
         tools:ignore="NewApi,RtlSymmetry,UnusedAttribute"

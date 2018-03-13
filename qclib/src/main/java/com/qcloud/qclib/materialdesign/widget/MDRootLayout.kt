@@ -69,11 +69,11 @@ class MDRootLayout @JvmOverloads constructor(
         reducePaddingNoTitleNoButtons = a.getBoolean(R.styleable.MDRootLayout_md_reduce_padding_no_title_no_buttons, true)
         a.recycle()
 
-        noTitlePaddingFull = r.getDimensionPixelSize(R.dimen.padding_8)
-        buttonPaddingFull = r.getDimensionPixelSize(R.dimen.padding_4)
+        noTitlePaddingFull = r.getDimensionPixelSize(R.dimen.padding_4)
+        buttonPaddingFull = r.getDimensionPixelSize(R.dimen.padding_2)
 
-        buttonHorizontalEdgeMargin = r.getDimensionPixelSize(R.dimen.padding_6)
-        buttonBarHeight = r.getDimensionPixelSize(R.dimen.tab_height)
+        buttonHorizontalEdgeMargin = r.getDimensionPixelSize(R.dimen.padding_3)
+        buttonBarHeight = r.getDimensionPixelSize(R.dimen.large_btn_height)
 
         dividerWidth = r.getDimensionPixelSize(R.dimen.store_width)
         dividerPaint.color = DialogUtil.resolveColor(context, R.attr.md_divider_color)
@@ -198,7 +198,7 @@ class MDRootLayout @JvmOverloads constructor(
                 }
             }
 
-            val buttonBarPadding = context.resources.getDimensionPixelSize(R.dimen.padding_6)
+            val buttonBarPadding = context.resources.getDimensionPixelSize(R.dimen.padding_3)
             val buttonFrameWidth = width - 2 * buttonBarPadding
             stacked = buttonsWidth > buttonFrameWidth
         }

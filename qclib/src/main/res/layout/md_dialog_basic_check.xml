@@ -20,16 +20,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clipToPadding="false"
-            android:paddingBottom="@dimen/view_padding"
-            android:paddingTop="@dimen/view_padding">
+            android:paddingBottom="@dimen/padding_2"
+            android:paddingTop="@dimen/padding_2">
 
             <TextView
                 android:id="@+id/md_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/view_padding"
-                android:paddingLeft="@dimen/padding_12"
-                android:paddingRight="@dimen/padding_12"
+                android:layout_marginBottom="@dimen/padding_2"
+                android:paddingLeft="@dimen/padding_6"
+                android:paddingRight="@dimen/padding_6"
                 android:textSize="@dimen/micro_text_size"
                 tools:text="Content"/>
 
@@ -40,8 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginLeft="@dimen/padding_8"
-            android:layout_marginRight="@dimen/padding_8"
+            android:layout_marginLeft="@dimen/padding_4"
+            android:layout_marginRight="@dimen/padding_4"
             android:focusable="true"
             android:gravity="start|center_vertical"
             tools:text="Don't ask again"/>
