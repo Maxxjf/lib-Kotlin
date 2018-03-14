@@ -36,6 +36,11 @@ object KeyBoardUtil {
         imm.hideSoftInputFromWindow(editText.windowToken, 0)
     }
 
+    fun showSoftInput(context: Context, editText: EditText) {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(editText, InputMethodManager.SHOW_FORCED)
+    }
+
     /**
      * 获取输入框高度
      *
