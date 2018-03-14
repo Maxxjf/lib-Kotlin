@@ -25,6 +25,7 @@ import com.qcloud.qclib.utils.DialogUtil
 import me.zhanghai.android.materialprogressbar.HorizontalProgressDrawable
 import me.zhanghai.android.materialprogressbar.IndeterminateCircularProgressDrawable
 import me.zhanghai.android.materialprogressbar.IndeterminateHorizontalProgressDrawable
+import timber.log.Timber
 import java.util.*
 
 /**
@@ -194,7 +195,7 @@ object DialogHelper {
             maxIconSize = DialogUtil.resolveDimension(builder.mContext!!, R.attr.md_icon_max_size)
         }
         if (builder.limitIconToDefaultSize || DialogUtil.resolveBoolean(builder.mContext!!, R.attr.md_icon_limit_icon_to_default_size)) {
-            maxIconSize = builder.mContext!!.resources.getDimensionPixelSize(R.dimen.tab_height)
+            maxIconSize = builder.mContext!!.resources.getDimensionPixelSize(R.dimen.float_btn_size)
         }
         if (maxIconSize > -1) {
             dialog.iconView?.adjustViewBounds = true
@@ -352,10 +353,10 @@ object DialogHelper {
             }
             if (builder.wrapCustomViewInScroll) {
                 val r = dialog.context.resources
-                val framePadding = r.getDimensionPixelSize(R.dimen.padding_12)
+                val framePadding = r.getDimensionPixelSize(R.dimen.padding_6)
                 val sv = ScrollView(dialog.context)
-                val paddingTop = r.getDimensionPixelSize(R.dimen.padding_4)
-                val paddingBottom = r.getDimensionPixelSize(R.dimen.padding_4)
+                val paddingTop = r.getDimensionPixelSize(R.dimen.padding_2)
+                val paddingBottom = r.getDimensionPixelSize(R.dimen.padding_2)
                 sv.clipToPadding = false
                 if (innerView is EditText) {
                     sv.setPadding(framePadding, paddingTop, framePadding, paddingBottom)
@@ -402,10 +403,10 @@ object DialogHelper {
         val display = wm.defaultDisplay
         val size = Point()
         display.getSize(size)
-        val windowWidth = size.x
-        val windowHeight = size.y
+        val windowWidth = Math.min(size.x, size.y)
+        val windowHeight = Math.max(size.x, size.y)
 
-        val windowVerticalPadding = builder.mContext!!.resources.getDimensionPixelSize(R.dimen.margin_10)
+        val windowVerticalPadding = builder.mContext!!.resources.getDimensionPixelSize(R.dimen.margin_8)
         val maxWidth = windowWidth * 4 / 5
 
         dialog.mView!!.maxHeight = windowHeight - windowVerticalPadding * 2

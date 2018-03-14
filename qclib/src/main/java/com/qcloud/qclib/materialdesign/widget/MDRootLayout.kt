@@ -70,12 +70,12 @@ class MDRootLayout @JvmOverloads constructor(
         a.recycle()
 
         noTitlePaddingFull = r.getDimensionPixelSize(R.dimen.padding_4)
-        buttonPaddingFull = r.getDimensionPixelSize(R.dimen.padding_2)
+        buttonPaddingFull = r.getDimensionPixelSize(R.dimen.line_height)
 
         buttonHorizontalEdgeMargin = r.getDimensionPixelSize(R.dimen.padding_3)
         buttonBarHeight = r.getDimensionPixelSize(R.dimen.large_btn_height)
 
-        dividerWidth = r.getDimensionPixelSize(R.dimen.store_width)
+        dividerWidth = r.getDimensionPixelSize(R.dimen.line_height)
         dividerPaint.color = DialogUtil.resolveColor(context, R.attr.md_divider_color)
         setWillNotDraw(false)
     }

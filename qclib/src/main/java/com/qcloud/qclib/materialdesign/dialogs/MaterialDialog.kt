@@ -22,6 +22,7 @@ import android.widget.*
 import com.qcloud.qclib.R
 import com.qcloud.qclib.materialdesign.enums.*
 import com.qcloud.qclib.materialdesign.widget.*
+import com.qcloud.qclib.utils.ColorUtil
 import com.qcloud.qclib.utils.DialogUtil
 import java.text.NumberFormat
 import java.util.*
@@ -876,8 +877,8 @@ class MaterialDialog constructor(val builder: Builder): BaseDialog(builder.mCont
 
         // 字体颜色
         var buttonRippleColor: Int = 0
-        var titleColor: Int = -1
-        var contentColor: Int = -1
+        var titleColor: Int = ColorUtil.parseColor("#282828")
+        var contentColor: Int = ColorUtil.parseColor("#656565")
 
         // 显示内容
         var title: CharSequence? = null
