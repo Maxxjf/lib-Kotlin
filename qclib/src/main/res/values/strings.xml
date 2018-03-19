@@ -31,4 +31,5 @@
     <string name="btn_finish">完成</string>
     <string name="btn_no">否</string>
     <string name="btn_yes">是</string>
+    <string name="title_activity_test">TestActivity</string>
 </resources>

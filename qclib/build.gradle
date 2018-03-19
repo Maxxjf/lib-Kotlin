@@ -2,14 +2,14 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion  rootProject.ext.android.compileSdkVersion
-    buildToolsVersion  rootProject.ext.android.buildToolsVersion
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion  rootProject.ext.android.minSdkVersion
-        targetSdkVersion  rootProject.ext.android.targetSdkVersion
-        versionCode  rootProject.ext.android.qclib_versionCode
-        versionName  rootProject.ext.android.qclib_versionName
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.qclib_versionCode
+        versionName rootProject.ext.android.qclib_versionName
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -52,6 +52,7 @@ dependencies {
 
     // 图片加载器Glide
     api 'com.github.bumptech.glide:glide:4.6.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     api 'com.github.bumptech.glide:okhttp3-integration:4.6.1'
     implementation 'jp.wasabeef:glide-transformations:2.0.0'
@@ -77,3 +78,5 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
+apply plugin: 'kotlin-android-extensions'
