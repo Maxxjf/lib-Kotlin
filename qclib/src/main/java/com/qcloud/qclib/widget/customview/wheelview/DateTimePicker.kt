@@ -160,10 +160,6 @@ open class DateTimePicker @JvmOverloads constructor(
         height = ViewGroup.LayoutParams.WRAP_CONTENT
     }
 
-    override fun initAfterViews() {
-
-    }
-
     override fun showAtLocation(parent: View?, gravity: Int, x: Int, y: Int) {
         super.showAtLocation(parent, gravity, x, y)
         setPopWindowBgAlpha(1.0f)

@@ -27,7 +27,6 @@ abstract class BasePopupWindow(protected val mContext: Context): PopupWindow(mCo
 
     private fun initWindow() {
         initPop()
-        initAfterViews()
     }
 
     /** 子类可重写 */
@@ -48,9 +47,6 @@ abstract class BasePopupWindow(protected val mContext: Context): PopupWindow(mCo
 
     /** 获取弹窗动画 */
     abstract val animId: Int
-
-    /** 初始化数据 */
-    abstract fun initAfterViews()
 
     /**设置背影颜色透明度*/
     open fun setPopWindowBgAlpha(@FloatRange(from = 0.0, to = 1.0)alpha: Float) {

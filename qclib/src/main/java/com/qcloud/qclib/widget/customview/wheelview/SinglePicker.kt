@@ -45,6 +45,10 @@ class SinglePicker<T>(context: Context): BasePopupWindow(context), View.OnClickL
     override val animId: Int
         get() = R.style.AnimationPopupWindow_bottom_to_up
 
+    init {
+        initAfterViews()
+    }
+
     override fun initPop() {
         super.initPop()
         itemWidth = ScreenUtil.getScreenWidth(mContext)
@@ -53,7 +57,7 @@ class SinglePicker<T>(context: Context): BasePopupWindow(context), View.OnClickL
         height = ViewGroup.LayoutParams.WRAP_CONTENT
     }
 
-    override fun initAfterViews() {
+    private fun initAfterViews() {
         mBtnCancel = mView?.findViewById(R.id.btn_cancel)
         mBtnFinish = mView?.findViewById(R.id.btn_finish)
         mTvTitle = mView?.findViewById(R.id.tv_title)
