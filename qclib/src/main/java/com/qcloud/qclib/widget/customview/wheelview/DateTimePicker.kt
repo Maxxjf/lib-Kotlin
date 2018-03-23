@@ -31,26 +31,26 @@ open class DateTimePicker @JvmOverloads constructor(
 
     private val TAG = "DateTimePicker"
 
-    private val mBtnCancel = mView.findViewById<TextView>(R.id.btn_cancel)
-    private val mBtnFinish = mView.findViewById<TextView>(R.id.btn_finish)
-    private val mTvTitle = mView.findViewById<TextView>(R.id.tv_title)
-    private val mLayoutTitle = mView.findViewById<RelativeLayout>(R.id.layout_title)
-    private val mLine = mView.findViewById<View>(R.id.line)
-    private val mWheelYear = mView.findViewById<WheelView>(R.id.wheel_year)
-    private val mTvYear = mView.findViewById<TextView>(R.id.tv_year)
-    private val mLayoutYear = mView.findViewById<LinearLayout>(R.id.layout_year)
-    private val mWheelMonth = mView.findViewById<WheelView>(R.id.wheel_month)
-    private val mTvMonth = mView.findViewById<TextView>(R.id.tv_month)
-    private val mLayoutMonth = mView.findViewById<LinearLayout>(R.id.layout_month)
-    private val mWheelDay = mView.findViewById<WheelView>(R.id.wheel_day)
-    private val mTvDay = mView.findViewById<TextView>(R.id.tv_day)
-    private val mLayoutDay = mView.findViewById<LinearLayout>(R.id.layout_day)
-    private val mWheelHour = mView.findViewById<WheelView>(R.id.wheel_hour)
-    private val mTvHour = mView.findViewById<TextView>(R.id.tv_hour)
-    private val mLayoutHour = mView.findViewById<LinearLayout>(R.id.layout_hour)
-    private val mWheelMinute = mView.findViewById<WheelView>(R.id.wheel_minute)
-    private val mTvMinute = mView.findViewById<TextView>(R.id.tv_minute)
-    private val mLayoutMinute = mView.findViewById<LinearLayout>(R.id.layout_minute)
+    private var mBtnCancel: TextView? = null
+    private var mBtnFinish: TextView? = null
+    private var mTvTitle: TextView? = null
+    private var mLayoutTitle: RelativeLayout? = null
+    private var mLine = mView.findViewById<View>(R.id.line)
+    private var mWheelYear: WheelView? = null
+    private var mTvYear: TextView? = null
+    private var mLayoutYear: LinearLayout? = null
+    private var mWheelMonth: WheelView? = null
+    private var mTvMonth: TextView? = null
+    private var mLayoutMonth: LinearLayout? = null
+    private var mWheelDay: WheelView? = null
+    private var mTvDay: TextView? = null
+    private var mLayoutDay: LinearLayout? = null
+    private var mWheelHour: WheelView? = null
+    private var mTvHour: TextView? = null
+    private var mLayoutHour: LinearLayout? = null
+    private var mWheelMinute: WheelView? = null
+    private var mTvMinute: TextView? = null
+    private var mLayoutMinute: LinearLayout? = null
 
     /**年*/
     private val years: MutableList<String> = ArrayList()
@@ -172,14 +172,37 @@ open class DateTimePicker @JvmOverloads constructor(
      * 初始化控件
      * */
     private fun initView() {
-        mLayoutYear.visibility = View.GONE
-        mLayoutMonth.visibility = View.GONE
-        mLayoutDay.visibility = View.GONE
-        mLayoutHour.visibility = View.GONE
-        mLayoutMinute.visibility = View.GONE
+        mBtnCancel = mView.findViewById(R.id.btn_cancel)
+        mBtnFinish = mView.findViewById(R.id.btn_finish)
+        mTvTitle = mView.findViewById(R.id.tv_title)
+        mLayoutTitle = mView.findViewById(R.id.layout_title)
+        mLine = mView.findViewById<View>(R.id.line)
+        mWheelYear = mView.findViewById(R.id.wheel_year)
+        mTvYear = mView.findViewById(R.id.tv_year)
+        mLayoutYear = mView.findViewById(R.id.layout_year)
+        mWheelMonth = mView.findViewById(R.id.wheel_month)
+        mTvMonth = mView.findViewById(R.id.tv_month)
+        mLayoutMonth = mView.findViewById(R.id.layout_month)
+        mWheelDay = mView.findViewById(R.id.wheel_day)
+        mTvDay = mView.findViewById(R.id.tv_day)
+        mLayoutDay = mView.findViewById(R.id.layout_day)
+        mWheelHour = mView.findViewById(R.id.wheel_hour)
+        mTvHour = mView.findViewById(R.id.tv_hour)
+        mLayoutHour = mView.findViewById(R.id.layout_hour)
+        mWheelMinute = mView.findViewById(R.id.wheel_minute)
+        mTvMinute = mView.findViewById(R.id.tv_minute)
+        mLayoutMinute = mView.findViewById(R.id.layout_minute)
 
-        mBtnCancel.setOnClickListener(this)
-        mBtnFinish.setOnClickListener(this)
+
+
+        mLayoutYear?.visibility = View.GONE
+        mLayoutMonth?.visibility = View.GONE
+        mLayoutDay?.visibility = View.GONE
+        mLayoutHour?.visibility = View.GONE
+        mLayoutMinute?.visibility = View.GONE
+
+        mBtnCancel?.setOnClickListener(this)
+        mBtnFinish?.setOnClickListener(this)
     }
 
     /**
@@ -215,24 +238,24 @@ open class DateTimePicker @JvmOverloads constructor(
             changeMinuteData(DateUtil.trimZero(selectedHour))
         }
 
-        mWheelYear.setTextSize(textSize.toFloat())
-        mWheelMonth.setTextSize(textSize.toFloat())
-        mWheelDay.setTextSize(textSize.toFloat())
-        mWheelHour.setTextSize(textSize.toFloat())
-        mWheelMinute.setTextSize(textSize.toFloat())
+        mWheelYear?.setTextSize(textSize.toFloat())
+        mWheelMonth?.setTextSize(textSize.toFloat())
+        mWheelDay?.setTextSize(textSize.toFloat())
+        mWheelHour?.setTextSize(textSize.toFloat())
+        mWheelMinute?.setTextSize(textSize.toFloat())
 
-        mWheelYear.setUseWeight(useWeight)
-        mWheelMonth.setUseWeight(useWeight)
-        mWheelDay.setUseWeight(useWeight)
-        mWheelHour.setUseWeight(useWeight)
-        mWheelMinute.setUseWeight(useWeight)
+        mWheelYear?.setUseWeight(useWeight)
+        mWheelMonth?.setUseWeight(useWeight)
+        mWheelDay?.setUseWeight(useWeight)
+        mWheelHour?.setUseWeight(useWeight)
+        mWheelMinute?.setUseWeight(useWeight)
 
         // 初始化年
         if (dateMode == YEAR_MONTH_DAY || dateMode == YEAR_MONTH) {
-            mLayoutYear.visibility = View.VISIBLE
-            mWheelYear.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
-            mWheelYear.setItems(years, selectedYearIndex)
-            mWheelYear.setOnItemSelectListener(object : WheelView.OnItemSelectListener {
+            mLayoutYear?.visibility = View.VISIBLE
+            mWheelYear?.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
+            mWheelYear?.setItems(years, selectedYearIndex)
+            mWheelYear?.setOnItemSelectListener(object : WheelView.OnItemSelectListener {
                 override fun onSelected(index: Int) {
                     selectedYearIndex = index
                     val selectedYearStr = years[selectedYearIndex]
@@ -245,10 +268,10 @@ open class DateTimePicker @JvmOverloads constructor(
                     //需要根据年份及月份动态计算天数
                     val selectedYear = DateUtil.trimZero(selectedYearStr)
                     changeMonthData(selectedYear)
-                    mWheelMonth.setItems(months, selectedMonthIndex)
+                    mWheelMonth?.setItems(months, selectedMonthIndex)
                     onWheelListener?.onMonthWheeled(selectedMonthIndex, months[selectedMonthIndex])
                     changeDayData(selectedYear, DateUtil.trimZero(months[selectedMonthIndex]))
-                    mWheelDay.setItems(days, selectedDayIndex)
+                    mWheelDay?.setItems(days, selectedDayIndex)
                     onWheelListener?.onDayWheeled(selectedDayIndex, days[selectedDayIndex])
                 }
             })
@@ -256,10 +279,10 @@ open class DateTimePicker @JvmOverloads constructor(
 
         // 初始化月
         if (dateMode != NONE) {
-            mLayoutMonth.visibility = View.VISIBLE
-            mWheelMonth.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
-            mWheelMonth.setItems(months, selectedMonthIndex)
-            mWheelMonth.setOnItemSelectListener(object : WheelView.OnItemSelectListener {
+            mLayoutMonth?.visibility = View.VISIBLE
+            mWheelMonth?.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
+            mWheelMonth?.setItems(months, selectedMonthIndex)
+            mWheelMonth?.setOnItemSelectListener(object : WheelView.OnItemSelectListener {
                 override fun onSelected(index: Int) {
                     selectedMonthIndex = index
                     val selectedMonthStr = months[selectedMonthIndex]
@@ -275,7 +298,7 @@ open class DateTimePicker @JvmOverloads constructor(
                             Calendar.getInstance(Locale.CHINA).get(Calendar.YEAR)
                         }
                         changeDayData(yearIndex, DateUtil.trimZero(selectedMonthStr))
-                        mWheelDay.setItems(days, selectedDayIndex)
+                        mWheelDay?.setItems(days, selectedDayIndex)
                         onWheelListener?.onDayWheeled(selectedDayIndex, days[selectedDayIndex])
                     }
                 }
@@ -284,10 +307,10 @@ open class DateTimePicker @JvmOverloads constructor(
 
         // 初始化日
         if (dateMode == YEAR_MONTH_DAY || dateMode == MONTH_DAY) {
-            mLayoutDay.visibility = View.VISIBLE
-            mWheelDay.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
-            mWheelDay.setItems(days, selectedDayIndex)
-            mWheelDay.setOnItemSelectListener(object : WheelView.OnItemSelectListener {
+            mLayoutDay?.visibility = View.VISIBLE
+            mWheelDay?.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
+            mWheelDay?.setItems(days, selectedDayIndex)
+            mWheelDay?.setOnItemSelectListener(object : WheelView.OnItemSelectListener {
                 override fun onSelected(index: Int) {
                     selectedDayIndex = index
                     onWheelListener?.onDayWheeled(selectedDayIndex, days[selectedDayIndex])
@@ -297,10 +320,10 @@ open class DateTimePicker @JvmOverloads constructor(
 
         // 初始化小时
         if (timeMode != NONE) {
-            mLayoutHour.visibility = View.VISIBLE
-            mWheelHour.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
-            mWheelHour.setItems(hours, selectedHour)
-            mWheelHour.setOnItemSelectListener(object : WheelView.OnItemSelectListener {
+            mLayoutHour?.visibility = View.VISIBLE
+            mWheelHour?.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
+            mWheelHour?.setItems(hours, selectedHour)
+            mWheelHour?.setOnItemSelectListener(object : WheelView.OnItemSelectListener {
                 override fun onSelected(index: Int) {
                     selectedHour = hours[index]
                     if (onWheelListener != null) {
@@ -308,15 +331,15 @@ open class DateTimePicker @JvmOverloads constructor(
                     }
                     Log.v(TAG, "change minutes after hour wheeled")
                     changeMinuteData(DateUtil.trimZero(selectedHour))
-                    mWheelMinute.setItems(minutes, selectedMinute)
+                    mWheelMinute?.setItems(minutes, selectedMinute)
                 }
             })
 
             // 初始化分钟
-            mLayoutMinute.visibility = View.VISIBLE
-            mWheelMinute.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
-            mWheelMinute.setItems(minutes, selectedMinute)
-            mWheelMinute.setOnItemSelectListener(object : WheelView.OnItemSelectListener {
+            mLayoutMinute?.visibility = View.VISIBLE
+            mWheelMinute?.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
+            mWheelMinute?.setItems(minutes, selectedMinute)
+            mWheelMinute?.setOnItemSelectListener(object : WheelView.OnItemSelectListener {
                 override fun onSelected(index: Int) {
                     selectedMinute = minutes[index]
                     onWheelListener?.onMinuteWheeled(index, selectedMinute)
@@ -467,7 +490,7 @@ open class DateTimePicker @JvmOverloads constructor(
     /** 设置顶部标题栏取消按钮是否显示  */
     fun setCancelVisible(cancelVisible: Boolean) {
         if (mBtnCancel != null) {
-            mBtnCancel.visibility = if (cancelVisible) View.VISIBLE else View.GONE
+            mBtnCancel?.visibility = if (cancelVisible) View.VISIBLE else View.GONE
         }
     }
 
@@ -476,7 +499,7 @@ open class DateTimePicker @JvmOverloads constructor(
      */
     fun setCancelText(cancelText: CharSequence) {
         if (mBtnCancel != null) {
-            mBtnCancel.text = cancelText
+            mBtnCancel?.text = cancelText
         }
     }
 
@@ -493,14 +516,14 @@ open class DateTimePicker @JvmOverloads constructor(
     /** 设置顶部标题栏取消按钮文字大小（单位为sp）  */
     fun setCancelTextSize(@IntRange(from = 10, to = 40) cancelTextSize: Int) {
         if (mBtnCancel != null) {
-            mBtnCancel.textSize = cancelTextSize.toFloat()
+            mBtnCancel?.textSize = cancelTextSize.toFloat()
         }
     }
 
     /** 设置顶部标题栏确定按钮文字  */
     fun setFinishText(submitText: CharSequence) {
         if (mBtnFinish != null) {
-            mBtnFinish.text = submitText
+            mBtnFinish?.text = submitText
         }
     }
 
@@ -517,14 +540,14 @@ open class DateTimePicker @JvmOverloads constructor(
     /** 设置顶部标题栏确定按钮文字大小（单位为sp）  */
     fun setFinishTextSize(@IntRange(from = 10, to = 40) submitTextSize: Int) {
         if (mBtnFinish != null) {
-            mBtnFinish.textSize = submitTextSize.toFloat()
+            mBtnFinish?.textSize = submitTextSize.toFloat()
         }
     }
 
     /** 设置顶部标题栏标题文字  */
     fun setTitleText(titleText: CharSequence) {
         if (mTvTitle != null) {
-            mTvTitle.text = titleText
+            mTvTitle?.text = titleText
         }
     }
 
@@ -541,7 +564,7 @@ open class DateTimePicker @JvmOverloads constructor(
     /** 设置顶部标题栏标题文字大小（单位为sp）  */
     fun setTitleTextSize(@IntRange(from = 10, to = 40) titleTextSize: Int) {
         if (mTvTitle != null) {
-            mTvTitle.textSize = titleTextSize.toFloat()
+            mTvTitle?.textSize = titleTextSize.toFloat()
         }
     }
 
@@ -691,19 +714,19 @@ open class DateTimePicker @JvmOverloads constructor(
      */
     open fun setLabel(yearLabel: String, monthLabel: String, dayLabel: String, hourLabel: String, minuteLabel: String) {
         if (mTvYear != null) {
-            mTvYear.text = yearLabel
+            mTvYear?.text = yearLabel
         }
         if (mTvMonth != null) {
-            mTvMonth.text = monthLabel
+            mTvMonth?.text = monthLabel
         }
         if (mTvDay != null) {
-            mTvDay.text = dayLabel
+            mTvDay?.text = dayLabel
         }
         if (mTvHour != null) {
-            mTvHour.text = hourLabel
+            mTvHour?.text = hourLabel
         }
         if (mTvMinute != null) {
-            mTvMinute.text = minuteLabel
+            mTvMinute?.text = minuteLabel
         }
     }
 

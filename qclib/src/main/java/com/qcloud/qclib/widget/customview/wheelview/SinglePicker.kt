@@ -23,12 +23,12 @@ import java.util.*
  * Date: 2018/1/19 16:47.
  */
 class SinglePicker<T>(context: Context): BasePopupWindow(context), View.OnClickListener {
-    private val mBtnCancel = mView.findViewById<TextView>(R.id.btn_cancel)
-    private val mBtnFinish = mView.findViewById<TextView>(R.id.btn_finish)
-    private val mTvTitle = mView.findViewById<TextView>(R.id.tv_title)
-    private val mLayoutTitle = mView.findViewById<RelativeLayout>(R.id.layout_title)
-    private val mLine = mView.findViewById<View>(R.id.line)
-    private val mWheelView = mView.findViewById<WheelView>(R.id.wheel_view)
+    private var mBtnCancel: TextView? = null
+    private var mBtnFinish: TextView? = null
+    private var mTvTitle: TextView? = null
+    private var mLayoutTitle: RelativeLayout? = null
+    private var mLine: View? = null
+    private var mWheelView: WheelView? = null
 
     /**不能识别对象，只能是int,float,double,long类型*/
     private val items: MutableList<T> = ArrayList()
@@ -54,10 +54,17 @@ class SinglePicker<T>(context: Context): BasePopupWindow(context), View.OnClickL
     }
 
     override fun initAfterViews() {
+        mBtnCancel = mView.findViewById(R.id.btn_cancel)
+        mBtnFinish = mView.findViewById(R.id.btn_finish)
+        mTvTitle = mView.findViewById(R.id.tv_title)
+        mLayoutTitle = mView.findViewById(R.id.layout_title)
+        mLine = mView.findViewById(R.id.line)
+        mWheelView = mView.findViewById(R.id.wheel_view)
+
         val params = mWheelView!!.layoutParams
         params.width = itemWidth
-        mWheelView.layoutParams = params
-        mWheelView.setOnItemSelectListener(object : WheelView.OnItemSelectListener {
+        mWheelView?.layoutParams = params
+        mWheelView?.setOnItemSelectListener(object : WheelView.OnItemSelectListener {
             override fun onSelected(index: Int) {
                 selectedItemIndex = index
                 if (onWheelListener != null) {
@@ -66,8 +73,8 @@ class SinglePicker<T>(context: Context): BasePopupWindow(context), View.OnClickL
             }
         })
 
-        mBtnCancel.setOnClickListener(this)
-        mBtnFinish.setOnClickListener(this)
+        mBtnCancel?.setOnClickListener(this)
+        mBtnFinish?.setOnClickListener(this)
     }
 
     override fun showAtLocation(parent: View?, gravity: Int, x: Int, y: Int) {
@@ -120,16 +127,16 @@ class SinglePicker<T>(context: Context): BasePopupWindow(context), View.OnClickL
             if (selectedItemIndex < 0 || selectedItemIndex >= items.size) {
                 selectedItemIndex = 0
             }
-            mWheelView.setItems(itemStrings, selectedItemIndex)
+            mWheelView?.setItems(itemStrings, selectedItemIndex)
         }
     }
 
     /** 设置选项的宽(dp)  */
     fun setItemWidth(itemWidth: Int) {
         if (mWheelView != null) {
-            val params = mWheelView.layoutParams
+            val params = mWheelView!!.layoutParams
             params.width = DensityUtil.dp2px(mContext, itemWidth.toFloat())
-            mWheelView.layoutParams = params
+            mWheelView!!.layoutParams = params
         } else {
             this.itemWidth = itemWidth
         }
@@ -154,7 +161,7 @@ class SinglePicker<T>(context: Context): BasePopupWindow(context), View.OnClickL
     /** 设置顶部标题栏背景颜色  */
     fun setTopBackgroundColor(@ColorInt topBackgroundColor: Int) {
         if (mLayoutTitle != null) {
-            mLayoutTitle.setBackgroundColor(topBackgroundColor)
+            mLayoutTitle?.setBackgroundColor(topBackgroundColor)
         }
     }
 
@@ -166,21 +173,21 @@ class SinglePicker<T>(context: Context): BasePopupWindow(context), View.OnClickL
     /** 设置顶部标题栏下划线是否显示  */
     fun setTopLineVisible(topLineVisible: Boolean) {
         if (mLine != null) {
-            mLine.visibility = if (topLineVisible) View.VISIBLE else View.GONE
+            mLine?.visibility = if (topLineVisible) View.VISIBLE else View.GONE
         }
     }
 
     /** 设置顶部标题栏下划线颜色  */
     fun setTopLineColor(@ColorInt topLineColor: Int) {
         if (mLine != null) {
-            mLine.setBackgroundColor(topLineColor)
+            mLine?.setBackgroundColor(topLineColor)
         }
     }
 
     /** 设置顶部标题栏取消按钮是否显示  */
     fun setCancelVisible(cancelVisible: Boolean) {
         if (mBtnCancel != null) {
-            mBtnCancel.visibility = if (cancelVisible) View.VISIBLE else View.GONE
+            mBtnCancel?.visibility = if (cancelVisible) View.VISIBLE else View.GONE
         }
     }
 
@@ -189,7 +196,7 @@ class SinglePicker<T>(context: Context): BasePopupWindow(context), View.OnClickL
      */
     fun setCancelText(cancelText: CharSequence) {
         if (mBtnCancel != null) {
-            mBtnCancel.text = cancelText
+            mBtnCancel?.text = cancelText
         }
     }
 
@@ -201,21 +208,21 @@ class SinglePicker<T>(context: Context): BasePopupWindow(context), View.OnClickL
     /** 设置顶部标题栏取消按钮文字颜色  */
     fun setCancelTextColor(@ColorInt cancelTextColor: Int) {
         if (mBtnCancel != null) {
-            mBtnCancel.setTextColor(cancelTextColor)
+            mBtnCancel?.setTextColor(cancelTextColor)
         }
     }
 
     /** 设置顶部标题栏取消按钮文字大小（单位为sp）  */
     fun setCancelTextSize(@IntRange(from = 10, to = 40) cancelTextSize: Int) {
         if (mBtnCancel != null) {
-            mBtnCancel.textSize = cancelTextSize.toFloat()
+            mBtnCancel?.textSize = cancelTextSize.toFloat()
         }
     }
 
     /** 设置顶部标题栏确定按钮文字  */
     fun setFinishText(submitText: CharSequence) {
         if (mBtnFinish != null) {
-            mBtnFinish.text = submitText
+            mBtnFinish?.text = submitText
         }
     }
 
@@ -232,14 +239,14 @@ class SinglePicker<T>(context: Context): BasePopupWindow(context), View.OnClickL
     /** 设置顶部标题栏确定按钮文字大小（单位为sp）  */
     fun setFinishTextSize(@IntRange(from = 10, to = 40) submitTextSize: Int) {
         if (mBtnFinish != null) {
-            mBtnFinish.textSize = submitTextSize.toFloat()
+            mBtnFinish?.textSize = submitTextSize.toFloat()
         }
     }
 
     /** 设置顶部标题栏标题文字  */
     fun setTitleText(titleText: CharSequence) {
         if (mTvTitle != null) {
-            mTvTitle.text = titleText
+            mTvTitle?.text = titleText
         }
     }
 
@@ -256,7 +263,7 @@ class SinglePicker<T>(context: Context): BasePopupWindow(context), View.OnClickL
     /** 设置顶部标题栏标题文字大小（单位为sp）  */
     fun setTitleTextSize(@IntRange(from = 10, to = 40) titleTextSize: Int) {
         if (mTvTitle != null) {
-            mTvTitle.textSize = titleTextSize.toFloat()
+            mTvTitle?.textSize = titleTextSize.toFloat()
         }
     }
 
