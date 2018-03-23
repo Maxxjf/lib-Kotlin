@@ -17,8 +17,7 @@ import com.qcloud.qclib.R
  * Date: 2018/1/16 14:17.
  */
 abstract class BasePopupWindow(protected val mContext: Context): PopupWindow(mContext) {
-    val mView: View
-        get() = LayoutInflater.from(mContext).inflate(viewId, null, false)
+    var mView: View? = null
     var mActivity: Activity = mContext as Activity
     var onPopWindowViewClick: OnPopWindowViewClick? = null
 
@@ -35,6 +34,7 @@ abstract class BasePopupWindow(protected val mContext: Context): PopupWindow(mCo
     open fun initPop() {
         width = ViewGroup.LayoutParams.WRAP_CONTENT
         height = ViewGroup.LayoutParams.WRAP_CONTENT
+        mView = LayoutInflater.from(mContext).inflate(viewId, null, false)
         contentView = mView
         isFocusable = true
         animationStyle = animId

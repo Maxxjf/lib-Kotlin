@@ -54,12 +54,12 @@ class SinglePicker<T>(context: Context): BasePopupWindow(context), View.OnClickL
     }
 
     override fun initAfterViews() {
-        mBtnCancel = mView.findViewById(R.id.btn_cancel)
-        mBtnFinish = mView.findViewById(R.id.btn_finish)
-        mTvTitle = mView.findViewById(R.id.tv_title)
-        mLayoutTitle = mView.findViewById(R.id.layout_title)
-        mLine = mView.findViewById(R.id.line)
-        mWheelView = mView.findViewById(R.id.wheel_view)
+        mBtnCancel = mView?.findViewById(R.id.btn_cancel)
+        mBtnFinish = mView?.findViewById(R.id.btn_finish)
+        mTvTitle = mView?.findViewById(R.id.tv_title)
+        mLayoutTitle = mView?.findViewById(R.id.layout_title)
+        mLine = mView?.findViewById(R.id.line)
+        mWheelView = mView?.findViewById(R.id.wheel_view)
 
         val params = mWheelView!!.layoutParams
         params.width = itemWidth
@@ -322,7 +322,7 @@ class SinglePicker<T>(context: Context): BasePopupWindow(context), View.OnClickL
      * 得到选择器视图，可内嵌到其他视图容器
      */
     override fun getContentView(): View {
-        return mView
+        return mView!!
     }
 
     /**

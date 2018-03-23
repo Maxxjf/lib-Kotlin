@@ -35,7 +35,7 @@ open class DateTimePicker @JvmOverloads constructor(
     private var mBtnFinish: TextView? = null
     private var mTvTitle: TextView? = null
     private var mLayoutTitle: RelativeLayout? = null
-    private var mLine = mView.findViewById<View>(R.id.line)
+    private var mLine: View? = null
     private var mWheelYear: WheelView? = null
     private var mTvYear: TextView? = null
     private var mLayoutYear: LinearLayout? = null
@@ -131,7 +131,7 @@ open class DateTimePicker @JvmOverloads constructor(
     annotation class TimeMode
 
     init {
-        if (dateMode == NONE || timeMode == NONE) {
+        if (dateMode == NONE && timeMode == NONE) {
             throw IllegalArgumentException("The modes are NONE at the same time")
         }
         if (dateMode == YEAR_MONTH_DAY && timeMode != NONE) {
@@ -145,6 +145,7 @@ open class DateTimePicker @JvmOverloads constructor(
             startHour = 0
             endHour = 23
         }
+        initView()
         initWheelView()
     }
 
@@ -160,7 +161,7 @@ open class DateTimePicker @JvmOverloads constructor(
     }
 
     override fun initAfterViews() {
-        initView()
+
     }
 
     override fun showAtLocation(parent: View?, gravity: Int, x: Int, y: Int) {
@@ -172,28 +173,26 @@ open class DateTimePicker @JvmOverloads constructor(
      * 初始化控件
      * */
     private fun initView() {
-        mBtnCancel = mView.findViewById(R.id.btn_cancel)
-        mBtnFinish = mView.findViewById(R.id.btn_finish)
-        mTvTitle = mView.findViewById(R.id.tv_title)
-        mLayoutTitle = mView.findViewById(R.id.layout_title)
-        mLine = mView.findViewById<View>(R.id.line)
-        mWheelYear = mView.findViewById(R.id.wheel_year)
-        mTvYear = mView.findViewById(R.id.tv_year)
-        mLayoutYear = mView.findViewById(R.id.layout_year)
-        mWheelMonth = mView.findViewById(R.id.wheel_month)
-        mTvMonth = mView.findViewById(R.id.tv_month)
-        mLayoutMonth = mView.findViewById(R.id.layout_month)
-        mWheelDay = mView.findViewById(R.id.wheel_day)
-        mTvDay = mView.findViewById(R.id.tv_day)
-        mLayoutDay = mView.findViewById(R.id.layout_day)
-        mWheelHour = mView.findViewById(R.id.wheel_hour)
-        mTvHour = mView.findViewById(R.id.tv_hour)
-        mLayoutHour = mView.findViewById(R.id.layout_hour)
-        mWheelMinute = mView.findViewById(R.id.wheel_minute)
-        mTvMinute = mView.findViewById(R.id.tv_minute)
-        mLayoutMinute = mView.findViewById(R.id.layout_minute)
-
-
+        mBtnCancel = mView?.findViewById(R.id.btn_cancel)
+        mBtnFinish = mView?.findViewById(R.id.btn_finish)
+        mTvTitle = mView?.findViewById(R.id.tv_title)
+        mLayoutTitle = mView?.findViewById(R.id.layout_title)
+        mLine = mView?.findViewById<View>(R.id.line)
+        mWheelYear = mView?.findViewById(R.id.wheel_year)
+        mTvYear = mView?.findViewById(R.id.tv_year)
+        mLayoutYear = mView?.findViewById(R.id.layout_year)
+        mWheelMonth = mView?.findViewById(R.id.wheel_month)
+        mTvMonth = mView?.findViewById(R.id.tv_month)
+        mLayoutMonth = mView?.findViewById(R.id.layout_month)
+        mWheelDay = mView?.findViewById(R.id.wheel_day)
+        mTvDay = mView?.findViewById(R.id.tv_day)
+        mLayoutDay = mView?.findViewById(R.id.layout_day)
+        mWheelHour = mView?.findViewById(R.id.wheel_hour)
+        mTvHour = mView?.findViewById(R.id.tv_hour)
+        mLayoutHour = mView?.findViewById(R.id.layout_hour)
+        mWheelMinute = mView?.findViewById(R.id.wheel_minute)
+        mTvMinute = mView?.findViewById(R.id.tv_minute)
+        mLayoutMinute = mView?.findViewById(R.id.layout_minute)
 
         mLayoutYear?.visibility = View.GONE
         mLayoutMonth?.visibility = View.GONE
@@ -478,7 +477,7 @@ open class DateTimePicker @JvmOverloads constructor(
     /** 设置顶部标题栏下划线是否显示  */
     fun setTopLineVisible(topLineVisible: Boolean) {
         if (mLine != null) {
-            mLine.visibility = if (topLineVisible) View.VISIBLE else View.GONE
+            mLine?.visibility = if (topLineVisible) View.VISIBLE else View.GONE
         }
     }
 
@@ -849,7 +848,7 @@ open class DateTimePicker @JvmOverloads constructor(
             } else {
                 DateUtil.fillZero(Calendar.getInstance().get(Calendar.MONTH) + 1)
             }
-            Log.v(TAG, "preSelectMonth=" + preSelectMonth)
+            Log.v(TAG, "preSelectMonth=$preSelectMonth")
         }
         months.clear()
         if (startMonth < 1 || endMonth < 1 || startMonth > 12 || endMonth > 12) {
@@ -1030,7 +1029,6 @@ open class DateTimePicker @JvmOverloads constructor(
 
         fun onDateTimePicked(month: String, day: String, hour: String, minute: String)
     }
-
 
     @Deprecated("use {@link OnMonthDayTimePickListener} instead")
     interface OnMonthDayPickListener : OnMonthDayTimePickListener
