@@ -364,6 +364,20 @@ object StringUtil {
         val isNum = pattern.matcher(numberStr.toString())
         return isNum.matches()
     }
+    /**
+     * 判断对象是否为纯数字金额
+     *
+     * @param numberStr
+     * @return
+     * */
+    fun isMoneyStr(numberStr: Any?): Boolean {
+        if (isBlankObject(numberStr)) {
+            return false
+        }
+        val pattern = Pattern.compile("[0-9.]*")
+        val isMoney = pattern.matcher(numberStr.toString())
+        return isMoney.matches()
+    }
 
     /**
      * 判断字符串是否为纯中文

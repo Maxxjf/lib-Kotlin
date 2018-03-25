@@ -23,6 +23,7 @@
 
     <string name="tip_no_data">暂无数据</string>
     <string name="tip_no_net">哎呀！网络出错了</string>
+    <string name="tip_update_pw_suceess">成功修改密码</string>
     <string name="btn_refresh">点击刷新</string>
 
     <string name="btn_cancel">取消</string>
