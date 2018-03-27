@@ -3,7 +3,6 @@ package com.qcloud.qclib.network
 import android.support.annotation.NonNull
 import android.util.Log
 import com.google.gson.JsonParseException
-import com.lzy.okgo.exception.HttpException
 import com.qcloud.qclib.beans.BaseResponse
 import com.qcloud.qclib.beans.RxBusEvent
 import com.qcloud.qclib.callback.DataCallback
@@ -15,6 +14,7 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import retrofit2.HttpException
 import java.io.IOException
 
 /**
@@ -36,6 +36,24 @@ object BaseApi {
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object: Observer<BaseResponse<T>> {
+                    override fun onNext(tBaseResponse: BaseResponse<T>) {
+                        Log.e("BaseApi", "onNext, BaseResponse = $tBaseResponse")
+                        when (tBaseResponse.status) {
+                            RequestStatusEnum.SUCCESS.status -> callback?.onSuccess(tBaseResponse.data, tBaseResponse.message)
+                            RequestStatusEnum.NO_ROOT.status -> {
+                                // 清空登录token
+                                TokenUtil.clearToken()
+                                // 抛登录异常
+                                callback?.onError(RequestStatusEnum.NO_ROOT.status, "登录过时，请重新登录")
+                                // 发送未登录的全局通知
+                                BusProvider.instance.post(RxBusEvent.newBuilder(RequestStatusEnum.NO_ROOT.status).build())
+                            }
+                            RequestStatusEnum.ERROR.status, RequestStatusEnum.INVALID.status -> {
+                                callback?.onError(tBaseResponse.status, tBaseResponse.message ?: "服务器请求出错!")
+                            }
+                        }
+                    }
+
                     override fun onSubscribe(d: Disposable) {
                         Log.e("BaseApi", "onSubscribe")
                     }
@@ -54,24 +72,6 @@ object BaseApi {
 
                     override fun onComplete() {
                         Log.e("BaseApi", "onComplete")
-                    }
-
-                    override fun onNext(tBaseResponse: BaseResponse<T>) {
-                        Log.e("BaseApi", "onNext, BaseResponse = $tBaseResponse")
-                        when (tBaseResponse.status) {
-                            RequestStatusEnum.SUCCESS.status -> callback?.onSuccess(tBaseResponse.data, tBaseResponse.message)
-                            RequestStatusEnum.NO_ROOT.status -> {
-                                // 清空登录token
-                                TokenUtil.clearToken()
-                                // 抛登录异常
-                                callback?.onError(RequestStatusEnum.NO_ROOT.status, "登录过时，请重新登录")
-                                // 发送未登录的全局通知
-                                BusProvider.instance.post(RxBusEvent.newBuilder(RequestStatusEnum.NO_ROOT.status).build())
-                            }
-                            RequestStatusEnum.ERROR.status, RequestStatusEnum.INVALID.status -> {
-                                callback?.onError(tBaseResponse.status, tBaseResponse.message ?: "服务器请求出错!")
-                            }
-                        }
                     }
                 })
 

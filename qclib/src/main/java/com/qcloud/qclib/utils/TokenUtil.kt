@@ -1,7 +1,7 @@
 package com.qcloud.qclib.utils
 
 import android.util.Log
-import com.qcloud.qclib.network.OkGoRequest
+import com.qcloud.qclib.network.FrameRequest
 
 /**
  * 类说明：app token工具类
@@ -20,7 +20,7 @@ object TokenUtil {
         val tokenStr = Base64Util.stringToBase64(token)
         if (StringUtil.isNotBlank(tokenStr)) {
             SharedUtil.writeString(TOKEN, tokenStr)
-            OkGoRequest.setToken(token)
+            FrameRequest.setToken(token)
         }
     }
 
@@ -30,7 +30,7 @@ object TokenUtil {
     fun clearToken() {
         Log.e("TokenUtil", "clearToken")
         SharedUtil.writeString(TOKEN, "")
-        OkGoRequest.setToken("")
+        FrameRequest.setToken("")
     }
 
     /**

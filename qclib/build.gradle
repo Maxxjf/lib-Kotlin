@@ -43,8 +43,11 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api rootProject.ext.dependencies["support_v7"]
     // 网络请求
-    api 'com.lzy.net:okgo:3.0.4'
-    api 'com.lzy.net:okrx2:2.0.2'
+    api 'com.squareup.retrofit2:retrofit:2.4.0'
+    api 'com.squareup.okhttp3:okhttp:3.10.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+    api 'com.squareup.retrofit2:converter-gson:2.3.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 
     // rxjava
     api 'io.reactivex.rxjava2:rxjava:2.1.9'

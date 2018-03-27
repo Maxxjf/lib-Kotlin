@@ -52,6 +52,8 @@ class FrameConfig {
         var appSign: String? = null
         // 全局上下文
         var appContext: Context? = null
+        // 是否缓存
+        var isCache: Boolean = false
 
         /**
          * 用户自定义的一些属性 .
@@ -122,21 +124,23 @@ class FrameConfig {
                     .observeOn(Schedulers.io())
                     .subscribe({ node ->
                         when {
-                        // 编码格式
+                            // 编码格式
                             "netUnicode".endsWith(node.nodeName) -> Companion.netUnicode = node.firstChild.nodeValue
-                        // 服务器域名
+                            // 服务器域名
                             "server".endsWith(node.nodeName) -> Companion.server = node.firstChild.nodeValue
-                        // 是否允许开启服务器后门
+                            // 是否允许开启服务器后门
                             "is_pastern".endsWith(node.nodeName) -> {
                                 if (StringUtil.isNotBlank(node.firstChild.nodeValue)) {
                                     Companion.isPastern = "1" == node.firstChild.nodeValue
                                 }
                             }
-                        // 缓存路径
+                            // 是否缓存
+                            "is_cache".endsWith(node.nodeName) -> Companion.isCache = "1" == node.firstChild.nodeValue
+                            // 缓存路径
                             "cache_path".endsWith(node.nodeName) -> Companion.cachePath = node.firstChild.nodeValue
-                        // 图片缓存路径
+                            // 图片缓存路径
                             "image_cache_path".endsWith(node.nodeName) -> Companion.imageCachePath = node.firstChild.nodeValue
-                        // 图片缓存大小，默认50M
+                            // 图片缓存大小，默认50M
                             "image_cache_size".endsWith(node.nodeName) -> {
                                 imageCacheSize = ConvertUtil.toInt(node.firstChild.nodeValue, 50)
                                 // 配置的图片缓存文件不能大于250M.
@@ -144,19 +148,19 @@ class FrameConfig {
                                     imageCacheSize = 250
                                 }
                             }
-                        // 文件服务器地址
+                            // 文件服务器地址
                             "file_server".endsWith(node.nodeName) -> Companion.fileServer = node.firstChild.nodeValue
-                        // app与服务器约定的签名
+                            // app与服务器约定的签名
                             "app_sign".endsWith(node.nodeName) -> Companion.appSign = node.firstChild.nodeValue
-                        // 日志输出目录
+                            // 日志输出目录
                             "log_path".endsWith(node.nodeName) -> Companion.logPath = node.firstChild.nodeValue
-                        // 是否开启全局异常处理
+                            // 是否开启全局异常处理
                             "debug".endsWith(node.nodeName) -> {
                                 if (StringUtil.isNotBlank(node.firstChild.nodeValue)) {
                                     Companion.openCrashHandler = "1" == node.firstChild.nodeValue
                                 }
                             }
-                        // 自定义一些属性
+                            // 自定义一些属性
                             StringUtil.isNotBlank(node.nodeName) && node.firstChild != null && node.firstChild.nodeValue != null -> {
                                 Companion.dyamicValue.put(node.nodeName, node.firstChild.nodeValue.trim())
                             }
