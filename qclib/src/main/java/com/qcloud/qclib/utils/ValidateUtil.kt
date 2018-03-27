@@ -168,4 +168,25 @@ object ValidateUtil {
             mobile
         }
     }
+
+    /**
+     * 设置手机为密码形式
+     *
+     * @param idCode 身份证号
+     * */
+    fun setIdCodeToPassword(idCode: String?): String? {
+        return if (StringUtil.isNotBlank(idCode) && idCode!!.length >= 18) {
+            val sb = StringBuilder()
+            for (i in 0 until idCode.length) {
+                if (i in 5..15) {
+                    sb.append('*')
+                } else {
+                    sb.append(idCode[i])
+                }
+            }
+            return String(sb)
+        } else {
+            idCode
+        }
+    }
 }
