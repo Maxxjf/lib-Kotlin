@@ -5,6 +5,9 @@ import android.os.Environment
 import android.util.Log
 import com.qcloud.qclib.FrameConfig
 import com.qcloud.qclib.FrameConfig.Companion.cachePath
+import com.qcloud.qclib.beans.ProgressBean
+import com.qcloud.qclib.callback.DownloadCallback
+import com.qcloud.qclib.callback.ProgressListener
 import com.qcloud.qclib.network.interceptor.CacheInterceptor
 import com.qcloud.qclib.network.interceptor.LoggingInterceptor
 import com.qcloud.qclib.network.interceptor.NetWorkInterceptor
@@ -14,11 +17,13 @@ import com.qcloud.qclib.utils.StringUtil
 import com.qcloud.qclib.utils.TokenUtil
 import okhttp3.Cache
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
+import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 
@@ -77,6 +82,57 @@ class FrameRequest private constructor() {
     }
 
     /**
+     * 下载请求
+     *
+     * @param clazz
+     * @param callback
+     * */
+    fun <T> createDownloadRequest(clazz: Class<T>, callback: DownloadCallback?): T {
+        val downloadClient: OkHttpClient = OkHttpClient.Builder()
+                .connectTimeout(20, TimeUnit.SECONDS)           // 连接超时时间，单位：秒
+                .readTimeout(20, TimeUnit.SECONDS)              // 读取超时时间，单位：秒
+                .writeTimeout(20, TimeUnit.SECONDS)             // 写超时时间，单位：秒
+                .addInterceptor(LoggingInterceptor())                   // 自定义日志打印拦截器，打印请求地址
+                .addNetworkInterceptor { chain ->
+                    // 添加拦截器，自定义ResponseBody，添加下载进度
+                    try {
+                        val response = chain.proceed(chain.request())
+
+                        val builder: Response.Builder = response.newBuilder()
+                                .body(ProgressResponseBody(response.body()!!, object : ProgressListener {
+
+                                    override fun onProgress(progress: Long, total: Long, done: Boolean) {
+                                        val bean = ProgressBean(progress, total, done)
+                                        callback?.onProgress(bean)
+                                    }
+                                }))
+
+                        builder.build()
+                    } catch (e: IOException) {
+                        Log.e("DOWNLOAD", "Exception: " + e.message)
+                        callback?.onError(e.message ?: "下载出错")
+                        null
+                    } catch (e: Exception) {
+                        Log.e("DOWNLOAD", "Exception: " + e.message)
+                        callback?.onError(e.message ?: "下载出错")
+                        null
+                    }
+                }.build()
+
+        val retrofit = Retrofit.Builder()
+        /**请求URL前缀，例：http://www.qi-cloud.com/  BaseUrl:总是以/结尾 @Url:不要以/开头*/
+        retrofit.baseUrl(BaseUrlUtil.getBaseUrl() ?: "")
+        /**请求服务*/
+        retrofit.client(downloadClient)
+        /**增加 RxJava2 适配器*/
+        retrofit.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        /**增加json 转换器*/
+        retrofit.addConverterFactory(GsonConverterFactory.create())
+
+        return retrofit.build().create(clazz)
+    }
+
+    /**
      * 获取缓存路径
      * */
     private fun getDiskCacheDir(context: Context): File? {
@@ -102,7 +158,6 @@ class FrameRequest private constructor() {
          */
         val instance: FrameRequest
             get() = RequestHolder.instance
-
 
         private val CLIENT_TYPE_KEY = "qc_client_type"
         private val CLIENT_TYPE = "android"

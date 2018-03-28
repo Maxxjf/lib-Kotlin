@@ -1,11 +1,13 @@
 package com.qcloud.qclib.network
 
+import android.os.Environment
 import android.support.annotation.NonNull
 import android.util.Log
 import com.google.gson.JsonParseException
 import com.qcloud.qclib.beans.BaseResponse
 import com.qcloud.qclib.beans.RxBusEvent
 import com.qcloud.qclib.callback.DataCallback
+import com.qcloud.qclib.callback.DownloadCallback
 import com.qcloud.qclib.enums.RequestStatusEnum
 import com.qcloud.qclib.rxbus.BusProvider
 import com.qcloud.qclib.utils.TokenUtil
@@ -14,7 +16,13 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.HttpException
+import java.io.BufferedInputStream
+import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 
 /**
@@ -75,5 +83,43 @@ object BaseApi {
                     }
                 })
 
+    }
+
+    /**
+     * 下载请求
+     *
+     * @param call 文件下载请求返回
+     * @param fileName 文件名称 jiuhua.apk
+     * @param callback
+     * */
+    fun disposeDownload(call: Call<ResponseBody>, fileName: String, callback: DownloadCallback?) {
+        call.enqueue(object : Callback<ResponseBody> {
+
+            override fun onResponse(call: Call<ResponseBody>, response: retrofit2.Response<ResponseBody>) {
+                try {
+                    val iStream = response.body()!!.byteStream()
+                    val file = File(Environment.getExternalStorageDirectory(), fileName)
+                    val fos = FileOutputStream(file)
+                    val bis = BufferedInputStream(iStream)
+                    val buffer = ByteArray(1024)
+                    var len: Int = bis.read(buffer)
+                    while (len != -1) {
+                        fos.write(buffer, 0, len)
+                        fos.flush()
+                        len = bis.read(buffer)
+                    }
+                    fos.close()
+                    bis.close()
+                    iStream.close()
+                    callback?.onSuccess(file)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
+                Log.e("DOWNLOAD", "onFailure: " + t?.message)
+            }
+        })
     }
 }
