@@ -1,15 +1,19 @@
 package com.qcloud.qclib.utils
 
+import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.graphics.*
+import android.graphics.Bitmap.CompressFormat
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.NinePatchDrawable
+import android.util.Base64
 import android.view.View
 import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
+
 
 /**
  * 类说明：图片处理工具
@@ -322,4 +326,70 @@ object BitmapUtil {
      * @param bytes
      * */
     fun bytes2Drawable(bytes: ByteArray): Drawable? = bitmap2Drawable(bytes2Bitmap(bytes))
+
+    /**
+     * bitmapToBase64
+     *
+     * @param @param bitmap
+     * @param @return    设定文件
+     * @return String    返回类型
+     * @throws
+     */
+    @SuppressLint("NewApi")
+    fun bitmapToBase64(bitmap: Bitmap?): String? {
+
+        // 要返回的字符串
+        var reslut: String? = null
+
+        var baos: ByteArrayOutputStream? = null
+
+        try {
+            if (bitmap != null) {
+
+                baos = ByteArrayOutputStream()
+                /**
+                 * 压缩只对保存有效果bitmap还是原来的大小
+                 */
+                bitmap.compress(CompressFormat.JPEG, 30, baos)
+
+                baos.flush()
+                baos.close()
+                // 转换为字节数组
+                val byteArray = baos.toByteArray()
+
+                // 转换为字符串
+                reslut = Base64.encodeToString(byteArray, Base64.DEFAULT)
+            } else {
+                return null
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        } finally {
+            try {
+                if (baos != null) {
+                    baos.close()
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+        return reslut
+
+    }
+
+    /**
+     * base64ToBitmap
+     *
+     * @param @param base64String
+     * @param @return    设定文件
+     * @return Bitmap    返回类型
+     * @throws
+     */
+    fun base64ToBitmap(base64String: String): Bitmap {
+        val decode = Base64.decode(base64String, Base64.DEFAULT)
+
+        val bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.size)
+
+        return bitmap
+    }
 }

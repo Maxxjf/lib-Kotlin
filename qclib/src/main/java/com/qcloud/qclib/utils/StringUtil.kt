@@ -364,6 +364,7 @@ object StringUtil {
         val isNum = pattern.matcher(numberStr.toString())
         return isNum.matches()
     }
+
     /**
      * 判断对象是否为纯数字金额
      *
