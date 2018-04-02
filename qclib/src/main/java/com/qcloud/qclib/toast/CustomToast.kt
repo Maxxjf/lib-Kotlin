@@ -7,6 +7,7 @@ import android.support.annotation.CheckResult
 import android.support.annotation.ColorInt
 import android.support.annotation.DrawableRes
 import android.support.annotation.NonNull
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -39,6 +40,7 @@ class CustomToast constructor(private val mContext: Context) {
         toastText = toastLayout.findViewById(R.id.toast_text)
 
         toastText.setTextColor(DEFAULT_TEXT_COLOR)
+        toastText.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE)
 
         toastLayout.setPadding(40, 20, 40, 20)
         toastLayout.setBackgroundResource(TOAST_BG)
@@ -146,6 +148,8 @@ class CustomToast constructor(private val mContext: Context) {
     }
 
     companion object {
+        // 字体大小
+        var TEXT_SIZE: Float = 12.0f
         // 字体颜色 白色
         @ColorInt var DEFAULT_TEXT_COLOR = Color.parseColor("#FFFFFF")
         // 错误颜色 红色

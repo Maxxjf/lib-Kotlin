@@ -3,6 +3,7 @@ package com.qcloud.qclib.widget.customview
 import android.content.Context
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -46,6 +47,7 @@ abstract class BaseEmptyView @JvmOverloads constructor(
 
         mTvTip?.text = defaultTip
         mTvTip?.setTextColor(tipColor)
+        mTvTip?.setTextSize(TypedValue.COMPLEX_UNIT_SP, tipSize)
         mTvTip?.visibility = if (isShowTip) View.VISIBLE else View.GONE
 
         mLayoutEmpty?.setBackgroundColor(bgColor)
@@ -109,6 +111,10 @@ abstract class BaseEmptyView @JvmOverloads constructor(
     /** 提示字体颜色 */
     protected open val tipColor: Int
         get() = ContextCompat.getColor(mContext, R.color.colorDark)
+
+    /** 提示文字大小 */
+    protected open val tipSize: Float
+        get() = mContext.resources.getDimension(R.dimen.micro_text_size)
 
     /** 设置是否显示提示文字 */
     protected open val isShowTip: Boolean

@@ -12,6 +12,8 @@ import com.qcloud.qclib.R
  * Date: 2017/12/20 13:51.
  */
 class ToastConfig constructor() {
+    // 字体大小
+    var textSize: Float = 12.0f
     // 字体颜色 白色
     @ColorInt private var defaultTextColor = Color.parseColor("#FFFFFF")
     // 错误颜色 红色
@@ -34,6 +36,11 @@ class ToastConfig constructor() {
     @DrawableRes private var warningIcon = R.drawable.icon_toast_warning
     // 错误图标
     @DrawableRes private var errorIcon = R.drawable.icon_toast_error
+
+    fun setTextSize(textSize: Float): ToastConfig {
+        this.textSize = textSize
+        return this
+    }
 
     @CheckResult
     fun setTextColor(@ColorInt textColor: Int): ToastConfig {
@@ -102,6 +109,7 @@ class ToastConfig constructor() {
     }
 
     fun apply() {
+        CustomToast.TEXT_SIZE = textSize
         CustomToast.DEFAULT_TEXT_COLOR = defaultTextColor
         CustomToast.ERROR_COLOR = errorColor
         CustomToast.INFO_COLOR = infoColor
