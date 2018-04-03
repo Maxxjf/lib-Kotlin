@@ -1,6 +1,7 @@
 package com.qcloud.qclib.widget.customview
 
 import android.content.Context
+import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -82,6 +83,11 @@ abstract class BaseEmptyView @JvmOverloads constructor(
     /** 没有网络了 */
     fun noNetWork() {
         mTvTip?.setText(R.string.tip_no_net)
+    }
+
+    /** 设置图标 */
+    fun setImageIcon(@DrawableRes imageRes: Int) {
+        mImageIcon?.setImageResource(imageRes)
     }
 
     /** 图标 */
