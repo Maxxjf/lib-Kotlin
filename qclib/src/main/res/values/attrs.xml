@@ -163,4 +163,39 @@
 
     </declare-styleable>
 
+    <!--自定义MaterialDesign输入风格-->
+    <declare-styleable name="Material_EditStyle">
+        <!--输入字体大小-->
+        <attr name="inputTextSize" format="dimension"/>
+        <!--输入字体颜色-->
+        <attr name="inputTextColor" format="color"/>
+        <!--输入图标-->
+        <attr name="inputIcon" format="reference"/>
+        <!--清除图示-->
+        <attr name="cleanIcon" format="reference"/>
+        <!--下划线颜色-->
+        <attr name="underlineColor" format="color"/>
+        <!--光标颜色-->
+        <attr name="cursorColor" format="color"/>
+        <!--提示内容-->
+        <attr name="hint" format="string"/>
+        <!--提示尺度-->
+        <attr name="hintScale" format="float"/>
+        <!--提示字体颜色-->
+        <attr name="hintColor" format="color"/>
+        <!--提示尺度颜色-->
+        <attr name="hintScaleColor" format="color"/>
+        <!--错误字体大小-->
+        <attr name="errorSize" format="dimension"/>
+        <!--错误字体颜色-->
+        <attr name="errorColor" format="color"/>
+        <!--输入总长度-->
+        <attr name="length" format="integer"/>
+        <!--是否显示输入长度-->
+        <attr name="wordCountEnabled" format="boolean"/>
+        <!--输入长度颜色-->
+        <attr name="wordCountColor" format="color"/>
+        <attr name="expandDuration" format="integer"/>
+    </declare-styleable>
+
 </resources>
