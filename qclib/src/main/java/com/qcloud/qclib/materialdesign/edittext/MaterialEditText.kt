@@ -13,7 +13,6 @@ import android.support.annotation.ColorInt
 import android.support.annotation.StringRes
 import android.text.Editable
 import android.text.InputFilter
-import android.text.TextUtils
 import android.text.TextWatcher
 import android.text.method.KeyListener
 import android.util.AttributeSet
@@ -22,7 +21,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnFocusChangeListener
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -33,6 +31,7 @@ import com.qcloud.qclib.materialdesign.listener.OnGetFocusListener
 import com.qcloud.qclib.materialdesign.listener.OnLostFocusListener
 import com.qcloud.qclib.utils.ApiReplaceUtil
 import com.qcloud.qclib.utils.DensityUtil
+import com.qcloud.qclib.utils.StringUtil
 
 /**
  * 类说明：自定义实现MaterialDesign风格输入
@@ -78,7 +77,8 @@ class MaterialEditText(
     private var mMaxLength = 0
     private var mWordCountEnabled = true
 
-    private var mExpand = true
+    /**是否扩大*/
+    private var isExpand = true
     private var mMinEditTextHeight = 2
     private var mEditTextLayoutHeight: Int = 0
     private var mHintHeight: Int = 0
@@ -92,11 +92,11 @@ class MaterialEditText(
 
     private val mOnFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
         if (hasFocus) {
-            mCleanLayout?.visibility = if (TextUtils.isEmpty(text)) View.GONE else View.VISIBLE
+            mCleanLayout?.visibility = if (StringUtil.isEmpty(text)) View.GONE else View.VISIBLE
             mEditText?.addTextChangedListener(mTextWatcher)
             handleEditTextLength()
         } else {
-            if (TextUtils.isEmpty(text) && !mExpand) {
+            if (StringUtil.isEmpty(text) && !isExpand) {
                 reduceEditText()
             }
             mCleanLayout?.visibility = View.GONE
@@ -123,10 +123,16 @@ class MaterialEditText(
         }
 
         override fun afterTextChanged(s: Editable) {
-            if (TextUtils.isEmpty(text)) {
+            if (StringUtil.isEmpty(text)) {
                 mCleanLayout?.visibility = View.GONE
+                if (!isExpand) {
+                    reduceEditText()
+                }
             } else {
                 mCleanLayout?.visibility = View.VISIBLE
+                if (isExpand) {
+                    expandEditText()
+                }
             }
 
             onGetFocusListener?.afterTextChanged(s)
@@ -255,7 +261,7 @@ class MaterialEditText(
         mEditTextLayout!!.setBackgroundColor(mUnderlineColor)
 
         mTvHint?.setOnClickListener {
-            if (mExpand) {
+            if (isExpand) {
                 expandEditText()
             } else {
                 reduceEditText()
@@ -295,7 +301,7 @@ class MaterialEditText(
 
     private fun handleEditTextLength() {
         mMaxLength = if (editTextMaxLength == 0) mMaxLength else editTextMaxLength
-        if (mWordCountEnabled && !TextUtils.isEmpty(text) && mMaxLength != 0) {
+        if (mWordCountEnabled && StringUtil.isNotEmpty(text) && mMaxLength != 0) {
             showWordCount(text.length, mMaxLength)
         } else {
             hideWordCount()
@@ -313,6 +319,9 @@ class MaterialEditText(
         mTvWordCount!!.visibility = View.GONE
     }
 
+    /**
+     * 显示输入框
+     * */
     @SuppressLint("ObjectAnimatorBinding")
     private fun expandEditText() {
         val expandAnimator = ValueAnimator.ofInt(mMinEditTextHeight, mEditTextLayoutHeight)
@@ -354,14 +363,17 @@ class MaterialEditText(
         })
         set.duration = ANIMATION_DURATION
         set.start()
-        mExpand = false
+        isExpand = false
         mEditText?.requestFocus()
 
-        //show softinput
-        (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
-                .showSoftInput(mEditText, InputMethodManager.SHOW_IMPLICIT)
+        // 显示软键盘
+//        (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+//                .showSoftInput(mEditText, InputMethodManager.SHOW_IMPLICIT)
     }
 
+    /**
+     * 隐藏输入框
+     * */
     @SuppressLint("ObjectAnimatorBinding")
     private fun reduceEditText() {
         val reduceAnimator = ValueAnimator.ofInt(mEditTextLayoutHeight, mMinEditTextHeight)
@@ -400,12 +412,12 @@ class MaterialEditText(
         })
         set.duration = ANIMATION_DURATION
         set.start()
-        mExpand = true
-        mEditText!!.clearFocus()
+        isExpand = true
+        mEditText?.clearFocus()
 
-        //hide softinput
-        (mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
-                .hideSoftInputFromWindow(mEditText!!.windowToken, 0)
+        // 隐藏软件盘
+//        (mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+//                .hideSoftInputFromWindow(mEditText!!.windowToken, 0)
     }
 
     private fun expandLayout(fromHeight: Int, targetHeight: Int, view: View): ValueAnimator {
@@ -481,12 +493,29 @@ class MaterialEditText(
     /**
      * 设置内容
      *
-     * @param s
+     * @param value
      * @return
      */
-    fun inputText(s: String) {
-        mEditText?.setText(s)
-        mEditText?.setSelection(s.length)
+    fun inputText(value: String) {
+        mEditText?.setText(value)
+        mEditText?.setSelection(value.length)
+        if (StringUtil.isNotEmpty(value) && isExpand) {
+            if (mTvHint != null) {
+                mTvHint?.post {
+                    expandEditText()
+                }
+            }
+        }
+    }
+
+    /**
+     * 设置内容
+     *
+     * @param resId
+     * @return
+     */
+    fun inputText(@StringRes resId: Int) {
+        inputText(mContext.getString(resId))
     }
 
     /**
@@ -587,7 +616,7 @@ class MaterialEditText(
         if (mEditText != null) {
             mEditText!!.background.setColorFilter(mUnderlineColor, PorterDuff.Mode.SRC_ATOP)
         }
-        if (!mExpand) {
+        if (!isExpand) {
             mEditTextLayout?.setBackgroundColor(mUnderlineColor)
         }
     }

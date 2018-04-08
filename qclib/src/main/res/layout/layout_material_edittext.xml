@@ -16,8 +16,10 @@
             android:id="@+id/tv_material_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding_1"
-            android:layout_marginStart="@dimen/padding_1"
+            android:paddingLeft="@dimen/padding_1"
+            android:paddingStart="@dimen/padding_1"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:textColor="@color/black"
             tools:text="请输入账号"/>
 
@@ -50,7 +52,7 @@
 
             <FrameLayout
                 android:id="@+id/fl_material_clean"
-                android:layout_width="30dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 android:layout_marginRight="@dimen/layout_margin"
@@ -58,8 +60,6 @@
 
                 <ImageView
                     android:id="@+id/iv_material_clean"
-                    android:maxWidth="10dp"
-                    android:maxHeight="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
