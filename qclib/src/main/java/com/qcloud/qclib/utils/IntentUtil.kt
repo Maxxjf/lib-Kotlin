@@ -63,7 +63,7 @@ object IntentUtil {
         val uri = if (Build.VERSION.SDK_INT >= 24) {
             // 处理android7.0问题
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            FileProvider.getUriForFile(context.applicationContext, packName + ".fileprovider", file!!)
+            FileProvider.getUriForFile(context.applicationContext, "$packName.fileprovider", file!!)
         } else {
             Uri.fromFile(file)
         }
