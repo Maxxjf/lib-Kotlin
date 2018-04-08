@@ -1,7 +1,5 @@
 package com.qcloud.qclib.callback
 
-import android.support.annotation.NonNull
-import com.qcloud.qclib.beans.ProgressBean
 import java.io.File
 
 /**
@@ -14,7 +12,7 @@ interface DownloadCallback {
     fun onAccept(acceptStr: String)
 
     /** 下载进度  */
-    fun onProgress(@NonNull progress: ProgressBean)
+    fun onProgress(progress: Long, total: Long)
 
     /** 下载出错  */
     fun onError(errMsg: String)
@@ -22,7 +20,6 @@ interface DownloadCallback {
     /**下载完成  */
     fun onComplete(completeMsg: String)
 
-    /**
-     * 下载成功 */
+    /** 下载成功 */
     fun onSuccess(file: File)
 }

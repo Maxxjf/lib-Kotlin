@@ -5,10 +5,8 @@ import android.os.Environment
 import android.util.Log
 import com.qcloud.qclib.FrameConfig
 import com.qcloud.qclib.FrameConfig.Companion.cachePath
-import com.qcloud.qclib.beans.ProgressBean
-import com.qcloud.qclib.callback.DownloadCallback
-import com.qcloud.qclib.callback.ProgressListener
 import com.qcloud.qclib.network.interceptor.CacheInterceptor
+import com.qcloud.qclib.network.interceptor.DownloadInterceptor
 import com.qcloud.qclib.network.interceptor.LoggingInterceptor
 import com.qcloud.qclib.network.interceptor.NetWorkInterceptor
 import com.qcloud.qclib.utils.BaseUrlUtil
@@ -17,15 +15,12 @@ import com.qcloud.qclib.utils.StringUtil
 import com.qcloud.qclib.utils.TokenUtil
 import okhttp3.Cache
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
-import java.io.IOException
 import java.util.concurrent.TimeUnit
-
 
 /**
  * 类说明：网络请求
@@ -85,39 +80,15 @@ class FrameRequest private constructor() {
      * 下载请求
      *
      * @param clazz
-     * @param callback
      * */
-    fun <T> createDownloadRequest(clazz: Class<T>, callback: DownloadCallback?): T {
+    fun <T> createDownloadRequest(clazz: Class<T>): T {
         val downloadClient: OkHttpClient = OkHttpClient.Builder()
                 .connectTimeout(20, TimeUnit.SECONDS)           // 连接超时时间，单位：秒
                 .readTimeout(20, TimeUnit.SECONDS)              // 读取超时时间，单位：秒
                 .writeTimeout(20, TimeUnit.SECONDS)             // 写超时时间，单位：秒
                 .addInterceptor(LoggingInterceptor())                   // 自定义日志打印拦截器，打印请求地址
-                .addNetworkInterceptor { chain ->
-                    // 添加拦截器，自定义ResponseBody，添加下载进度
-                    try {
-                        val response = chain.proceed(chain.request())
-
-                        val builder: Response.Builder = response.newBuilder()
-                                .body(ProgressResponseBody(response.body()!!, object : ProgressListener {
-
-                                    override fun onProgress(progress: Long, total: Long, done: Boolean) {
-                                        val bean = ProgressBean(progress, total, done)
-                                        callback?.onProgress(bean)
-                                    }
-                                }))
-
-                        builder.build()
-                    } catch (e: IOException) {
-                        Log.e("DOWNLOAD", "Exception: " + e.message)
-                        callback?.onError(e.message ?: "下载出错")
-                        null
-                    } catch (e: Exception) {
-                        Log.e("DOWNLOAD", "Exception: " + e.message)
-                        callback?.onError(e.message ?: "下载出错")
-                        null
-                    }
-                }.build()
+                .addNetworkInterceptor(DownloadInterceptor())           // 自定义拦截下载进度
+                .build()
 
         val retrofit = Retrofit.Builder()
         /**请求URL前缀，例：http://www.qi-cloud.com/  BaseUrl:总是以/结尾 @Url:不要以/开头*/

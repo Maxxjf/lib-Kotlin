@@ -1,6 +1,6 @@
 package com.qcloud.qclib.network
 
-import com.qcloud.qclib.callback.ProgressListener
+import com.qcloud.qclib.beans.ProgressBean
 import okhttp3.MediaType
 import okhttp3.ResponseBody
 import okio.*
@@ -11,9 +11,7 @@ import java.io.IOException
  * Author: Kuzan
  * Date: 2018/3/27 20:08.
  */
-class ProgressResponseBody(
-        private val responseBody: ResponseBody,
-        private val listener: ProgressListener) : ResponseBody() {
+class ProgressResponseBody(private val responseBody: ResponseBody) : ResponseBody() {
 
     private var bufferedSource: BufferedSource? = null
 
@@ -40,7 +38,8 @@ class ProgressResponseBody(
             override fun read(sink: Buffer, byteCount: Long): Long {
                 val bytesRead: Long = super.read(sink, byteCount)
                 totalBytesRead += if (bytesRead != -1L) bytesRead else 0
-                listener.onProgress(totalBytesRead, responseBody.contentLength(), bytesRead == -1L)
+                val bean = ProgressBean(totalBytesRead, responseBody.contentLength(), bytesRead == -1L)
+                LoadBus.instance.post(bean)
                 return bytesRead
             }
         }
