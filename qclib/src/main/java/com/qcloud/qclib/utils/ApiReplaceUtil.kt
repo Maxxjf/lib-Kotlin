@@ -8,6 +8,9 @@ import android.support.annotation.DrawableRes
 import android.support.annotation.NonNull
 import android.support.v4.content.ContextCompat
 import android.view.View
+import android.text.Html
+
+
 
 /**
  * Description: api过时替换工具类
@@ -63,6 +66,22 @@ object ApiReplaceUtil {
             view.background = drawable
         } else {
             view.setBackgroundDrawable(drawable)
+        }
+    }
+
+    /**
+     * Html实现
+     *
+     * @param content
+     * */
+    fun fromHtml(content: String?): CharSequence {
+        if (StringUtil.isEmpty(content)) {
+            return ""
+        }
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(content, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            Html.fromHtml(content)
         }
     }
 }
