@@ -16,7 +16,6 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.Transformation
 import android.widget.AbsListView
 import android.widget.LinearLayout
-import android.widget.ScrollView
 import com.qcloud.qclib.R
 import com.qcloud.qclib.refresh.listener.LoadMoreAnimatorListener
 import com.qcloud.qclib.refresh.listener.MyAnimationListener
@@ -1154,7 +1153,7 @@ open class SwipeRefreshLayout @JvmOverloads constructor(
             }
 
             ensureTarget()
-            if (mTarget != null && mTarget is RecyclerView || mTarget is AbsListView) {
+            if (mTarget != null && (mTarget is RecyclerView || mTarget is AbsListView)) {
                 mTarget?.scrollBy(0, FOOTER_DEFAULT_HEIGHT)
             }
         }
