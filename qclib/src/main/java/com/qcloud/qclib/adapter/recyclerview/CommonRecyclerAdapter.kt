@@ -3,10 +3,12 @@ package com.qcloud.qclib.adapter.recyclerview
 import android.content.Context
 import android.support.annotation.NonNull
 import android.support.v7.widget.RecyclerView
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import com.qcloud.qclib.R
 
 /**
  * 类说明：RecyclerView适配器
@@ -21,6 +23,9 @@ abstract class CommonRecyclerAdapter<T>(protected val mContext: Context): Recycl
 
     override fun onCreateViewHolder(@NonNull parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val view = LayoutInflater.from(mContext).inflate(viewId, parent, false)
+        val typedValue = TypedValue()
+        mContext.theme.resolveAttribute(R.attr.selectableItemBackground, typedValue, true)
+        view.setBackgroundResource(typedValue.resourceId)
         return RecyclerViewHolder(view)
     }
 
