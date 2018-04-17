@@ -175,8 +175,8 @@
         <attr name="cleanIcon" format="reference"/>
         <!--下划线颜色-->
         <attr name="underlineColor" format="color"/>
-        <!--光标颜色-->
-        <attr name="cursorColor" format="color"/>
+        <!--光标背景-->
+        <attr name="cursorDrawable" format="reference"/>
         <!--提示内容-->
         <attr name="hint" format="string"/>
         <!--提示尺度-->

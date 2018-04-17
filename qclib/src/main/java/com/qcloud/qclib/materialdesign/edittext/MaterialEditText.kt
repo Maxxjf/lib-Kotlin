@@ -5,12 +5,11 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
 import android.os.Parcelable
 import android.support.annotation.ColorInt
+import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
 import android.text.Editable
 import android.text.InputFilter
@@ -61,7 +60,8 @@ class MaterialEditText(
     private var mInputIconId = -1
     private var mCleanIconId = -1
     private var mUnderlineColor = -1
-    private var mCursorColor = -1
+    @DrawableRes
+    private var mCursorDrawable = -1
 
     /**提示属性配置*/
     private var mHintText: String? = ""
@@ -87,7 +87,7 @@ class MaterialEditText(
 
     private var ANIMATION_DURATION: Long = 100
 
-    var isControlKeyBoard: Boolean = true
+    var isControlKeyBoard = true
     var onGetFocusListener: OnGetFocusListener? = null
     var onLostFocusListener: OnLostFocusListener? = null
     var onErrorListener: OnErrorListener? = null
@@ -193,8 +193,7 @@ class MaterialEditText(
                 mCleanIconId = a.getResourceId(R.styleable.Material_EditStyle_cleanIcon, mCleanIconId)
                 mUnderlineColor = a.getColor(R.styleable.Material_EditStyle_underlineColor,
                         ApiReplaceUtil.getColor(mContext, R.color.colorDivider))
-                mCursorColor = a.getColor(R.styleable.Material_EditStyle_cursorColor,
-                        ApiReplaceUtil.getColor(mContext, R.color.colorDivider))
+                mCursorDrawable = a.getResourceId(R.styleable.Material_EditStyle_cursorDrawable, mCursorDrawable)
                 mHintText = a.getString(R.styleable.Material_EditStyle_hint)
                 mHintScale = a.getFloat(R.styleable.Material_EditStyle_hintScale, mHintScale)
                 mHintColor = a.getColor(R.styleable.Material_EditStyle_hintColor,
@@ -247,7 +246,7 @@ class MaterialEditText(
 
         // init edittext
         mEditText!!.background.setColorFilter(mUnderlineColor, PorterDuff.Mode.SRC_ATOP)
-        cursorColor(mCursorColor)
+        cursorDrawalbe(mCursorDrawable)
         mEditText!!.onFocusChangeListener = mOnFocusChangeListener
         mEditText!!.setOnEditorActionListener(onEditorActionListener)
 
@@ -471,28 +470,35 @@ class MaterialEditText(
     /**
      * 设置光标的颜色
      * */
-    fun cursorColor(color: Int) {
+    fun cursorDrawalbe(@DrawableRes drawableRes: Int) {
         try {
-            mCursorColor = color
             val fCursorDrawableRes = TextView::class.java.getDeclaredField("mCursorDrawableRes")
             fCursorDrawableRes.isAccessible = true
-            val mCursorDrawableRes = fCursorDrawableRes.getInt(mEditText)
-            val fEditor = TextView::class.java.getDeclaredField("mEditor")
-            fEditor.isAccessible = true
-            val editor = fEditor.get(mEditText)
-            val clazz = editor.javaClass
-            val fCursorDrawable = clazz.getDeclaredField("mCursorDrawable")
-            fCursorDrawable.isAccessible = true
-
-            val drawables = arrayOfNulls<Drawable>(2)
-            drawables[0] = ApiReplaceUtil.getDrawable(mContext, mCursorDrawableRes)
-            drawables[1] = ApiReplaceUtil.getDrawable(mContext, mCursorDrawableRes)
-            drawables[0]?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
-            drawables[1]?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
-            fCursorDrawable.set(editor, drawables)
+            fCursorDrawableRes.set(mEditText, drawableRes)
         } catch (ignored: Throwable) {
             ignored.printStackTrace()
         }
+//        try {
+//            mCursorColor = color
+//            val fCursorDrawableRes = TextView::class.java.getDeclaredField("mCursorDrawableRes")
+//            fCursorDrawableRes.isAccessible = true
+//            val mCursorDrawableRes = fCursorDrawableRes.getInt(mEditText)
+//            val fEditor = TextView::class.java.getDeclaredField("mEditor")
+//            fEditor.isAccessible = true
+//            val editor = fEditor.get(mEditText)
+//            val clazz = editor.javaClass
+//            val fCursorDrawable = clazz.getDeclaredField("mCursorDrawable")
+//            fCursorDrawable.isAccessible = true
+//
+//            val drawables = arrayOfNulls<Drawable>(2)
+//            drawables[0] = ApiReplaceUtil.getDrawable(mContext, mCursorDrawableRes)
+//            drawables[1] = ApiReplaceUtil.getDrawable(mContext, mCursorDrawableRes)
+//            drawables[0]?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+//            drawables[1]?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+//            fCursorDrawable.set(editor, drawables)
+//        } catch (ignored: Throwable) {
+//            ignored.printStackTrace()
+//        }
     }
 
     /**
@@ -739,7 +745,7 @@ class MaterialEditText(
         ss.inputIconId = mInputIconId
         ss.cleanIconId = mCleanIconId
         ss.underlineColor = mUnderlineColor
-        ss.cursorColor = mCursorColor
+        ss.cursorDrawable = mCursorDrawable
         ss.hintText = mHintText
         ss.hintScale = mHintScale
         ss.hintColor = mHintColor
@@ -763,7 +769,7 @@ class MaterialEditText(
         mInputIconId = state.inputIconId!!
         mCleanIconId = state.cleanIconId!!
         mUnderlineColor = state.underlineColor!!
-        mCursorColor = state.cursorColor!!
+        mCursorDrawable = state.cursorDrawable!!
         mHintText = state.hintText
         mHintScale = state.hintScale!!
         mHintColor = state.hintColor!!

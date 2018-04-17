@@ -15,7 +15,7 @@ class MdEditTextSavedState: View.BaseSavedState {
     var inputIconId: Int? = null
     var cleanIconId: Int? = null
     var underlineColor: Int? = null
-    var cursorColor: Int? = null
+    var cursorDrawable: Int? = null
     var hintText: String? = null
     var hintScale: Float? = null
     var hintColor: Int? = null
@@ -35,7 +35,7 @@ class MdEditTextSavedState: View.BaseSavedState {
         inputIconId = source.readInt()
         cleanIconId = source.readInt()
         underlineColor = source.readInt()
-        cursorColor = source.readInt()
+        cursorDrawable = source.readInt()
         hintText = source.readString()
         hintScale = source.readFloat()
         hintColor = source.readInt()
@@ -55,7 +55,7 @@ class MdEditTextSavedState: View.BaseSavedState {
         out.writeInt(inputIconId!!)
         out.writeInt(cleanIconId!!)
         out.writeInt(underlineColor!!)
-        out.writeInt(cursorColor!!)
+        out.writeInt(cursorDrawable!!)
         out.writeString(hintText)
         out.writeFloat(hintScale!!)
         out.writeInt(hintColor!!)
