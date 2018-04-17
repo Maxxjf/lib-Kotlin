@@ -84,7 +84,6 @@ class PermissionsManager(@NonNull mActivity: Activity) {
      * <p>
      * 如果没有请求到一个或多个权限，请调用相关的框架方法来询问用户是否允许权限。
      */
-    @RequiresApi(Build.VERSION_CODES.M)
     fun <T> ensureEach(@NonNull vararg permissions: String): ObservableTransformer<T, PermissionBean> {
         return ObservableTransformer { o -> request(o, *permissions) }
     }
@@ -103,7 +102,6 @@ class PermissionsManager(@NonNull mActivity: Activity) {
      *      在应用程序初始化阶段调用请求权限。
      *      最好在onCreate()中请求
      */
-    @RequiresApi(Build.VERSION_CODES.M)
     fun request(vararg permissions: String): Observable<Boolean> {
         return Observable.just(TRIGGER).compose(ensure(*permissions))
     }
@@ -111,7 +109,6 @@ class PermissionsManager(@NonNull mActivity: Activity) {
     /**
      * 在应用程序初始化阶段调用请求权限。
      */
-    @RequiresApi(Build.VERSION_CODES.M)
     fun requestEach(vararg permissions: String): Observable<PermissionBean> {
         return Observable.just(TRIGGER).compose(ensureEach(*permissions))
     }
@@ -154,7 +151,7 @@ class PermissionsManager(@NonNull mActivity: Activity) {
         // 在多重权限的情况下，我们为每一个创建一个可观察到的权限。
         // 最后，观测值组合起来具有独特的响应。
         for (permission in permissions) {
-            mPermissionsFragment.log("Requesting permission " + permission)
+            mPermissionsFragment.log("Requesting permission $permission")
             if (isGranted(permission)) {
                 // 已经申请到的权限或者android 6.0以下
                 // 返回已授予权限的对象。

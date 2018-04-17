@@ -5,6 +5,7 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
@@ -31,6 +32,7 @@ import com.qcloud.qclib.materialdesign.listener.OnGetFocusListener
 import com.qcloud.qclib.materialdesign.listener.OnLostFocusListener
 import com.qcloud.qclib.utils.ApiReplaceUtil
 import com.qcloud.qclib.utils.DensityUtil
+import com.qcloud.qclib.utils.KeyBoardUtil
 import com.qcloud.qclib.utils.StringUtil
 
 /**
@@ -85,6 +87,7 @@ class MaterialEditText(
 
     private var ANIMATION_DURATION: Long = 100
 
+    var isControlKeyBoard: Boolean = true
     var onGetFocusListener: OnGetFocusListener? = null
     var onLostFocusListener: OnLostFocusListener? = null
     var onErrorListener: OnErrorListener? = null
@@ -264,7 +267,7 @@ class MaterialEditText(
             if (isExpand) {
                 expandEditText()
             } else {
-                reduceEditText()
+                //reduceEditText()
             }
         }
 
@@ -367,8 +370,9 @@ class MaterialEditText(
         mEditText?.requestFocus()
 
         // 显示软键盘
-//        (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
-//                .showSoftInput(mEditText, InputMethodManager.SHOW_IMPLICIT)
+        if (isControlKeyBoard) {
+            KeyBoardUtil.showKeybord(mContext, mEditText!!)
+        }
     }
 
     /**
@@ -416,8 +420,9 @@ class MaterialEditText(
         mEditText?.clearFocus()
 
         // 隐藏软件盘
-//        (mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
-//                .hideSoftInputFromWindow(mEditText!!.windowToken, 0)
+        if (isControlKeyBoard) {
+            KeyBoardUtil.hideKeybord(mContext, mEditText!!)
+        }
     }
 
     private fun expandLayout(fromHeight: Int, targetHeight: Int, view: View): ValueAnimator {
