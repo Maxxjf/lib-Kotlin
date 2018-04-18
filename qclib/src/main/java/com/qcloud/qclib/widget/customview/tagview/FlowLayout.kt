@@ -122,8 +122,8 @@ open class FlowLayout @JvmOverloads constructor(
             lineWidth += childWidth + lp.leftMargin + lp.rightMargin
             lineHeight = Math.max(lineHeight, childHeight + lp.topMargin + lp.bottomMargin)
             lineViews.add(child)
-
         }
+
         mLineHeight.add(lineHeight)
         mLineWidth.add(lineWidth)
         mAllViews.add(lineViews)
@@ -164,7 +164,6 @@ open class FlowLayout @JvmOverloads constructor(
             }
             top += lineHeight
         }
-
     }
 
     override fun generateLayoutParams(attrs: AttributeSet): ViewGroup.LayoutParams {

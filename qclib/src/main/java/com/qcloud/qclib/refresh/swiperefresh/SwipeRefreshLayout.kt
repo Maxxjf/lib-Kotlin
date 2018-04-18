@@ -1057,7 +1057,7 @@ open class SwipeRefreshLayout @JvmOverloads constructor(
     /**
      * 自动加载更多
      */
-    protected fun autoLoadMore(offset: Int) {
+    open fun autoLoadMore(offset: Int) {
         if (mRefreshing || mCurrentAction == ACTION_DOWN || mCurrentAction == ACTION_UP) {
             return
         }

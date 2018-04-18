@@ -101,7 +101,6 @@ class TagLayout @JvmOverloads constructor(
             tagViewContainer.addView(tagView)
             addView(tagViewContainer)
 
-
             if (preCheckedList.contains(i)) {
                 tagViewContainer.isChecked = true
             }
@@ -197,6 +196,9 @@ class TagLayout @JvmOverloads constructor(
         }
     }
 
+    /**
+     * 保存值
+     * */
     override fun onSaveInstanceState(): Parcelable? {
         val bundle = Bundle()
         bundle.putParcelable(KEY_DEFAULT, super.onSaveInstanceState())
@@ -212,6 +214,9 @@ class TagLayout @JvmOverloads constructor(
         return bundle
     }
 
+    /**
+     * 获取值
+     * */
     override fun onRestoreInstanceState(state: Parcelable) {
         if (state is Bundle) {
             val mSelectPos = state.getString(KEY_CHOOSE_POS)
